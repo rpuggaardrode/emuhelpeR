@@ -6,6 +6,13 @@ fn_proc <- function(df,
                     speaker=NULL,
                     group_var=NULL){
 
+  spec_cols <- c(fncol, f1dep, f2dep, f3dep, speaker, group_var)
+  avail_cols <- colnames(df)
+  if (any(!(spec_cols %in% avail_cols))){
+    msng <- spec_cols[which(!(spec_cols %in% avail_cols))]
+    stop('The following arguments are not available in the data frame: \n', msng)
+  }
+
   for (f in 1:length(fncol)){
 
     if (fncol[1] != 'F1'){
@@ -38,21 +45,21 @@ fn_proc <- function(df,
 
   if (!is.null(f1dep)) {
     for (d in f1dep) {
-      df[[d]] <- ifelse(is.na(df$f0) | is.na(df$F1), NA, df[[d]])
+      df[[d]] <- ifelse(is.na(df$F0) | is.na(df$F1), NA, df[[d]])
       df <- normz(df, d, speaker)
     }
   }
 
   if (!is.null(f2dep)) {
     for (d in f2dep) {
-      df[[d]] <- ifelse(is.na(df$f0) | is.na(df$F2), NA, df[[d]])
+      df[[d]] <- ifelse(is.na(df$F0) | is.na(df$F2), NA, df[[d]])
       df <- normz(df, d, speaker)
     }
   }
 
   if (!is.null(f3dep)) {
     for (d in f3dep) {
-      df[[d]] <- ifelse(is.na(df$f0) | is.na(df$F3), NA, df[[d]])
+      df[[d]] <- ifelse(is.na(df$F0) | is.na(df$F3), NA, df[[d]])
       df <- normz(df, d, speaker)
     }
   }

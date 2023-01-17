@@ -5,6 +5,13 @@ f0_proc <- function(df,
                     group_var=NULL,
                     timing_rm=NULL) {
 
+  spec_cols <- c(f0col, dep, speaker, group_var)
+  avail_cols <- colnames(df)
+  if (any(!(spec_cols %in% avail_cols))){
+    msng <- spec_cols[which(!(spec_cols %in% avail_cols))]
+    stop('The following arguments are not available in the data frame: \n', msng)
+  }
+
   rowna <- which(df[,f0col]==0)
   df[rowna,f0col] <- NA
 

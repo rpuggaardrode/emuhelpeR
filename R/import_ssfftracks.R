@@ -46,4 +46,6 @@ import_ssfftracks <- function(db_handle,
 
   }
 
+  return(tmp)
+
 }
