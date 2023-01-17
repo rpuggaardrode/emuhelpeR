@@ -1,0 +1,135 @@
+{
+  "name": "emuhelpeR_testdata",
+  "UUID": "33157d9f-4a3a-468a-882b-60d3b10ea771",
+  "mediafileExtension": "wav",
+  "ssffTrackDefinitions": [
+    {
+      "name": "praatF0",
+      "columnName": "pF0",
+      "fileExtension": "pF0"
+    },
+    {
+      "name": "eggF0",
+      "columnName": "pdF0",
+      "fileExtension": "pdF0"
+    },
+    {
+      "name": "H1H2c",
+      "columnName": "H1H2c",
+      "fileExtension": "H1H2c"
+    },
+    {
+      "name": "H1A1c",
+      "columnName": "H1A1c",
+      "fileExtension": "H1A1c"
+    },
+    {
+      "name": "H1A3c",
+      "columnName": "H1A3c",
+      "fileExtension": "H1A3c"
+    },
+    {
+      "name": "CPP",
+      "columnName": "CPP",
+      "fileExtension": "CPP"
+    },
+    {
+      "name": "CQ_PH",
+      "columnName": "CQ_PH",
+      "fileExtension": "CQ_PH"
+    },
+    {
+      "name": "CQ_PD",
+      "columnName": "CQ_PD",
+      "fileExtension": "CQ_PD"
+    },
+    {
+      "name": "praatF1",
+      "columnName": "pF1",
+      "fileExtension": "pF1"
+    },
+    {
+      "name": "praatF2",
+      "columnName": "pF2",
+      "fileExtension": "pF2"
+    },
+    {
+      "name": "praatF3",
+      "columnName": "pF3",
+      "fileExtension": "pF3"
+    }
+  ],
+  "levelDefinitions": [
+    {
+      "name": "SAM",
+      "type": "SEGMENT",
+      "attributeDefinitions": [
+        {
+          "name": "SAM",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "name": "ORL",
+      "type": "SEGMENT",
+      "attributeDefinitions": [
+        {
+          "name": "ORL",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "name": "LAR",
+      "type": "EVENT",
+      "attributeDefinitions": [
+        {
+          "name": "LAR",
+          "type": "STRING"
+        }
+      ]
+    }
+  ],
+  "linkDefinitions": [
+    {
+      "type": "ONE_TO_MANY",
+      "superlevelName": "SAM",
+      "sublevelName": "ORL"
+    },
+    {
+      "type": "ONE_TO_MANY",
+      "superlevelName": "ORL",
+      "sublevelName": "LAR"
+    }
+  ],
+  "EMUwebAppConfig": {
+    "perspectives": [
+      {
+        "name": "default",
+        "signalCanvases": {
+          "order": [
+            "OSCI",
+            "SPEC"
+          ],
+          "assign": [],
+          "contourLims": []
+        },
+        "levelCanvases": {
+          "order": [
+            "SAM",
+            "ORL",
+            "LAR"
+          ]
+        },
+        "twoDimCanvases": {
+          "order": []
+        }
+      }
+    ],
+    "activeButtons": {
+      "saveBundle": true,
+      "showHierarchy": true
+    }
+  }
+}

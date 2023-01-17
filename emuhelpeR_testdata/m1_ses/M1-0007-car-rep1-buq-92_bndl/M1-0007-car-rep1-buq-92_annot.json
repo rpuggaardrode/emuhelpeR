@@ -1,0 +1,127 @@
+{
+  "name": "M1-0007-car-rep1-buq-92",
+  "annotates": "M1-0007-car-rep1-buq-92.wav",
+  "sampleRate": 44100,
+  "levels": [
+    {
+      "name": "SAM",
+      "type": "SEGMENT",
+      "items": [
+        {
+          "id": 1,
+          "sampleStart": 0,
+          "sampleDur": 114947,
+          "labels": [
+            {
+              "name": "SAM",
+              "value": "buq"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ORL",
+      "type": "SEGMENT",
+      "items": [
+        {
+          "id": 2,
+          "sampleStart": 0,
+          "sampleDur": 22004,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "sampleStart": 22005,
+          "sampleDur": 6507,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "rv"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "sampleStart": 28513,
+          "sampleDur": 5934,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "cl"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "sampleStart": 34448,
+          "sampleDur": 7004,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "op"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "sampleStart": 41453,
+          "sampleDur": 73494,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LAR",
+      "type": "EVENT",
+      "items": [
+        {
+          "id": 7,
+          "samplePoint": 28513,
+          "labels": [
+            {
+              "name": "LAR",
+              "value": "ov"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "fromID": 1,
+      "toID": 2
+    },
+    {
+      "fromID": 1,
+      "toID": 3
+    },
+    {
+      "fromID": 1,
+      "toID": 4
+    },
+    {
+      "fromID": 1,
+      "toID": 5
+    },
+    {
+      "fromID": 1,
+      "toID": 6
+    },
+    {
+      "fromID": 4,
+      "toID": 7
+    }
+  ]
+}
