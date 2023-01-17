@@ -1,3 +1,75 @@
+#' Processing fundamental frequency and dependencies
+#'
+#' `f0_proc` performs automatic outlier removal of fundamental frequency
+#' values and dependent values, normalizes the resulting values, and rescales to
+#' the original frequency scale.
+#'
+#' Zero values are recoded as `NA`. Values are
+#' recoded as `NA` if they fall outside of three standard deviations of the mean
+#' value within the same group. If the data contain other measures that are
+#' dependent on F0, e.g. spectral measures, then the corresponding values
+#' of these are also coded as `NA`.
+#'
+#' `f0_proc` also contains by-speakers z-score normalization and stores it
+#' in a separate column, then rescales the z-scores based on the overall mean
+#' and SD values.
+#'
+#' Optionally, values that are measured too far away from a boundary specified
+#' by the user are coded as `NA`. This option assumes that the data frame
+#' was generated using the [emuR::get_trackdata()] function to import data
+#' from an EMU-SDMS database.
+#'
+#' @param df A data frame containing a column with fundamental frequency
+#' measurements and columns with any other information to be accounted for.
+#' @param f0col A string containing the name of the column in `df` that contains
+#' fundamental frequency values. Default is `F0`.
+#' @param dep One or more strings containing the name of columns in `df`
+#' containing measures that are directly dependent on fundamental frequency.
+#' Optional; default is `NULL`.
+#' @param speaker An optional string giving the name of the column in `df`
+#' containing speakers id's. Default is `NULL`, in which case z-score
+#' normalization will be done on the basis of the data at large and no rescaled
+#' values will be returned.
+#' @param group_var One or more strings containing the names of columns in `df`
+#' to be used as grouping variables for automatic outlier removal.
+#' Optional; default is `NULL`, in which case automatic outlier removal will
+#' be based on means and standard deviation in the data at large.
+#' @param timing_rm An optional list with two arguments:
+#' * A string containing the label associated with a boundary in the data.
+#' Values that are measured sufficiently far from this boundary are recoded as
+#' `NA`. `f0_proc` assumes that this label is stored in the column `labels` in
+#' a data frame generated with [emuR::get_trackdata()].
+#' * A number indicating the distance from this boundary at which measurements
+#' should be ignored. See example below.
+#'
+#' @return A data frame identical to `df` with outliers coded as `NA` and
+#' with the added columns `zF0` and `normF0`, and corresponding column for
+#' values that depend on F0. The column with F0 values are renamed `F0`.
+#' @seealso Some of the functionality in `f0_proc` assumes that the user has
+#' generated the raw data using [emuR] and EMU-SDMS.
+#'
+#' `f0_proc` is incorporated in the function [import_ssfftracks()] which
+#' automatically imports F0 values and other available measures from an EMU
+#' database, performs outlier removal, normalizes values, and rescales.
+#' @export
+#'
+#' @examples
+#' colnames(ssff_data)
+#' head(ssff_data$praatF0, 20)
+#' head(ssff_data$H1H2c, 20)
+#' sum(is.na(ssff_data$praatF0))
+#' sum(is.na(ssff_data$H1H2c))
+#' #Uses both speaker and vowel variables for outlier removal; F0 values and
+#' #dependents are recoded as NA if they are more than 250 ms from boundaries
+#' #labeled 'cl'.
+#' x <- f0_proc(df=ssff_data, f0col='praatF0', dep='H1H2c', speaker='speaker',
+#' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
+#' colnames(x)
+#' head(x$F0, 20)
+#' head(x$zF0, 20)
+#' head(x$normF0, 20)
+#' head(x$zH1H2c, 20)
+#' head(x$normH1H2c, 20)
 f0_proc <- function(df,
                     f0col='F0',
                     dep=NULL,
@@ -28,8 +100,8 @@ f0_proc <- function(df,
     } else {
       df <- df %>%
         dplyr::group_by(.data$session, .data$sl_rowIdx) %>%
-        dplyr::mutate(times_rel = ifelse(labels==timing_rm[1], -rev(.data$times_rel), .data$times_rel)) %>%
-        dplyr::mutate(F0 = ifelse(.data$times_rel < -as.numeric(timing_rm[2]), NA, .data$F0))
+        dplyr::mutate(times_rel = ifelse(labels==timing_rm[[1]], -rev(.data$times_rel), .data$times_rel)) %>%
+        dplyr::mutate(F0 = ifelse(.data$times_rel < -timing_rm[[2]], NA, .data$F0))
     }
   }
 
@@ -55,9 +127,3 @@ f0_proc <- function(df,
   return(df)
 
 }
-
-#Won't give the exact same results as James' code, because relative time labels
-#for 'cl' > 250 are removed *before* the rest of the automated outlier removal.
-#This seems better to me -- if we remove those because we don't believe
-#they're solid measurements, then they also shouldn't be part of calculating
-#the mean and standard deviations for automated removal.

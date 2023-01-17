@@ -9,7 +9,9 @@
 #' @param var A string giving the name of the column in `df` containing the
 #' continuous variable to be normalized.
 #' @param speaker An optional string giving the name of the column in `df`
-#' containing speakers id's. Default is `NULL`.
+#' containing speakers id's. Default is `NULL`, in which case z-score
+#' normalization will be done on the basis of the data at large and no rescaled
+#' values will be returned.
 #'
 #' @return A data frame identical to `df` with the added columns `z{var}` and
 #' `norm{var}`.
@@ -33,9 +35,7 @@ normz <- function(df, var, speaker=NULL) {
                       !!as.name(paste0('z', var)) * stats::sd(!!as.name(var), na.rm=T))
   } else {
     df <- df %>%
-      dplyr::mutate('z{var}' := as.vector(scale(!!as.name(var)))) %>%
-      dplyr::mutate('norm{var}' := mean(!!as.name(var), na.rm=T) +
-                      !!as.name(paste0('z', var)) * stats::sd(!!as.name(var), na.rm=T))
+      dplyr::mutate('z{var}' := as.vector(scale(!!as.name(var))))
   }
 
   return(df)

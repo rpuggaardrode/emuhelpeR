@@ -11,10 +11,12 @@ normz(df, var, speaker = NULL)
 and rescaled, and optionally a column containing a unique id for each speaker.}
 
 \item{var}{A string giving the name of the column in \code{df} containing the
-continuous #' variable to be normalized.}
+continuous variable to be normalized.}
 
 \item{speaker}{An optional string giving the name of the column in \code{df}
-containing speakers id's. Default is \code{NULL}.}
+containing speakers id's. Default is \code{NULL}, in which case z-score
+normalization will be done on the basis of the data at large and no rescaled
+values will be returned.}
 }
 \value{
 A data frame identical to \code{df} with the added columns \verb{z\{var\}} and
