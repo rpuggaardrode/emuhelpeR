@@ -10,7 +10,7 @@
 #' dependent on F0, e.g. spectral measures, then the corresponding values
 #' of these are also coded as `NA`.
 #'
-#' `f0_proc` also contains by-speakers z-score normalization and stores it
+#' `f0_proc` also calculates by-speaker z-score normalization and stores it
 #' in a separate column, then rescales the z-scores based on the overall mean
 #' and SD values.
 #'
@@ -70,6 +70,8 @@
 #' head(x$normF0, 20)
 #' head(x$zH1H2c, 20)
 #' head(x$normH1H2c, 20)
+#' sum(is.na(x$F0))
+#' sum(is.na(x$H1H2c))
 f0_proc <- function(df,
                     f0col='F0',
                     dep=NULL,

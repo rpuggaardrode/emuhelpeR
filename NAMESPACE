@@ -2,6 +2,7 @@
 
 export("%>%")
 export(f0_proc)
+export(fn_proc)
 export(normz)
 importFrom(data.table,":=")
 importFrom(magrittr,"%>%")

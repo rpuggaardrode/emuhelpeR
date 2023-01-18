@@ -46,8 +46,8 @@ should be ignored. See example below.
 }
 \value{
 A data frame identical to \code{df} with outliers coded as \code{NA} and
-with the added columns \code{zF0} and \code{normF0}. The column with F0 values are
-renamed \code{F0}.
+with the added columns \code{zF0} and \code{normF0}, and corresponding column for
+values that depend on F0. The column with F0 values are renamed \code{F0}.
 }
 \description{
 \code{f0_proc} performs automatic outlier removal of fundamental frequency
@@ -61,7 +61,7 @@ value within the same group. If the data contain other measures that are
 dependent on F0, e.g. spectral measures, then the corresponding values
 of these are also coded as \code{NA}.
 
-\code{f0_proc} also contains by-speakers z-score normalization and stores it
+\code{f0_proc} also calculates by-speaker z-score normalization and stores it
 in a separate column, then rescales the z-scores based on the overall mean
 and SD values.
 
@@ -87,6 +87,8 @@ head(x$zF0, 20)
 head(x$normF0, 20)
 head(x$zH1H2c, 20)
 head(x$normH1H2c, 20)
+sum(is.na(x$F0))
+sum(is.na(x$H1H2c))
 }
 \seealso{
 Some of the functionality in \code{f0_proc} assumes that the user has
