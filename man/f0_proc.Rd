@@ -42,7 +42,9 @@ Values that are measured sufficiently far from this boundary are recoded as
 a data frame generated with \code{\link[emuR:get_trackdata]{emuR::get_trackdata()}}.
 \item A number indicating the distance from this boundary at which measurements
 should be ignored. See example below.
-}}
+}
+
+Optional; default is \code{NULL}.}
 }
 \value{
 A data frame identical to \code{df} with outliers coded as \code{NA} and

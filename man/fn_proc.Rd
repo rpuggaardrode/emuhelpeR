@@ -35,8 +35,6 @@ Only used if formant dependencies are also being processed; see \code{fndep}.}
 The structure is as follows:
 \verb{fndep=list(c('F1dep', 'F1'), c('F2dep', 'F2')}
 
-One or more strings containing the name of columns in \code{df}
-containing measures that are directly dependent on F1.
 Optional; default is \code{NULL}.}
 
 \item{speaker}{An optional string giving the name of the column in \code{df}

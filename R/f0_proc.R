@@ -42,6 +42,8 @@
 #' * A number indicating the distance from this boundary at which measurements
 #' should be ignored. See example below.
 #'
+#' Optional; default is `NULL`.
+#'
 #' @return A data frame identical to `df` with outliers coded as `NA` and
 #' with the added columns `zF0` and `normF0`, and corresponding column for
 #' values that depend on F0. The column with F0 values are renamed `F0`.

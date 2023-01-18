@@ -39,8 +39,6 @@
 #' The structure is as follows:
 #' `fndep=list(c('F1dep', 'F1'), c('F2dep', 'F2')`
 #'
-#' One or more strings containing the name of columns in `df`
-#' containing measures that are directly dependent on F1.
 #' Optional; default is `NULL`.
 #' @param speaker An optional string giving the name of the column in `df`
 #' containing speakers id's. Default is `NULL`, in which case z-score

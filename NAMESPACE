@@ -3,6 +3,7 @@
 export("%>%")
 export(f0_proc)
 export(fn_proc)
+export(import_ssfftracks)
 export(normz)
 importFrom(data.table,":=")
 importFrom(magrittr,"%>%")
