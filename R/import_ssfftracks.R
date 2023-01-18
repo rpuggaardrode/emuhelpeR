@@ -67,6 +67,10 @@
 #' #' Optional; default is `NULL`.
 #' @param proc A Boolean. Default is `TRUE`; if `FALSE`, the function only
 #' returns raw measurement values and does not perform any preprocessing.
+#' @param report A Boolean. If `TRUE` (default), prints a message stating
+#' how many values in each track were
+#' recoded as `NA` during automated outlier removal and how many F0 values were
+#' `NA` in the raw data.
 #'
 #' @return A data frame with the same structure as `seg_list` containing columns
 #' with all measurements available in the SSFF database. Optionally also contains
@@ -104,7 +108,8 @@ import_ssfftracks <- function(db_handle,
                             group_var=NULL,
                             outlier_rm=NULL,
                             timing_rm=NULL,
-                            proc=TRUE
+                            proc=TRUE,
+                            report=TRUE
 ) {
 
   trax <- emuR::list_ssffTrackDefinitions(db_handle)$name
@@ -130,17 +135,22 @@ import_ssfftracks <- function(db_handle,
     }
 
     if (!is.null(f0col)) {
-      tmp <- f0_proc(tmp, f0col, f0dep, speaker, group_var, timing_rm)
+      tmp <- f0_proc(tmp, f0col, f0dep, speaker, group_var, timing_rm, report)
     }
     if (!is.null(fncol)) {
-      tmp <- fn_proc(tmp, fncol, 'F0', fndep, speaker, group_var)
+      tmp <- fn_proc(tmp, fncol, 'F0', fndep, speaker, group_var, report)
     }
 
     missing <- trax[which(!(trax %in% fixed))]
 
     if (!is.null(outlier_rm)) {
       for(v in outlier_rm) {
-        tmp <- outlier_rm(tmp, v, group_var)
+        tmp <- outlier_rm(tmp, v, group_var, report=F)
+        if (report) {
+          print(paste0('Number of NAs removed from ', v,
+                       ' track during automated outlier removal: ',
+                       sum(is.na(tmp[[v]]))))
+        }
       }
     }
 

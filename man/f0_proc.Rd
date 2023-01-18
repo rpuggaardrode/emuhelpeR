@@ -10,7 +10,8 @@ f0_proc(
   dep = NULL,
   speaker = NULL,
   group_var = NULL,
-  timing_rm = NULL
+  timing_rm = NULL,
+  report = TRUE
 )
 }
 \arguments{
@@ -45,6 +46,11 @@ should be ignored. See example below.
 }
 
 Optional; default is \code{NULL}.}
+
+\item{report}{A Boolean. If \code{TRUE} (default), prints a message stating
+how many NAs were in the track originally and how many values were
+recoded as \code{NA} during automated outlier removal. If there are F0 dependencies,
+also prints how many values were recoded as \code{NA} in those.}
 }
 \value{
 A data frame identical to \code{df} with outliers coded as \code{NA} and

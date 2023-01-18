@@ -15,7 +15,8 @@ import_ssfftracks(
   group_var = NULL,
   outlier_rm = NULL,
   timing_rm = NULL,
-  proc = TRUE
+  proc = TRUE,
+  report = TRUE
 )
 }
 \arguments{
@@ -81,6 +82,11 @@ should be ignored. See example below.
 
 \item{proc}{A Boolean. Default is \code{TRUE}; if \code{FALSE}, the function only
 returns raw measurement values and does not perform any preprocessing.}
+
+\item{report}{A Boolean. If \code{TRUE} (default), prints a message stating
+how many values in each track were
+recoded as \code{NA} during automated outlier removal and how many F0 values were
+\code{NA} in the raw data.}
 }
 \value{
 A data frame with the same structure as \code{seg_list} containing columns

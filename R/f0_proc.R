@@ -43,6 +43,10 @@
 #' should be ignored. See example below.
 #'
 #' Optional; default is `NULL`.
+#' @param report A Boolean. If `TRUE` (default), prints a message stating
+#' how many NAs were in the track originally and how many values were
+#' recoded as `NA` during automated outlier removal. If there are F0 dependencies,
+#' also prints how many values were recoded as `NA` in those.
 #'
 #' @return A data frame identical to `df` with outliers coded as `NA` and
 #' with the added columns `zF0` and `normF0`, and corresponding column for
@@ -79,7 +83,8 @@ f0_proc <- function(df,
                     dep=NULL,
                     speaker=NULL,
                     group_var=NULL,
-                    timing_rm=NULL) {
+                    timing_rm=NULL,
+                    report=TRUE) {
 
   spec_cols <- c(f0col, dep, speaker, group_var)
   avail_cols <- colnames(df)
@@ -90,6 +95,10 @@ f0_proc <- function(df,
 
   rowna <- which(df[,f0col]==0)
   df[rowna,f0col] <- NA
+  init_na <- sum(is.na(df[[f0col]]))
+  if (report) {
+    print(paste0('Initial number of NAs in F0 track: ', init_na))
+  }
 
   df$F0 <- df[[f0col]]
   if (f0col != 'F0') {
@@ -109,12 +118,23 @@ f0_proc <- function(df,
     }
   }
 
-  df <- outlier_rm(df, 'F0', group_var)
+  df <- outlier_rm(df, 'F0', group_var, report=F)
+  curr_na <- sum(is.na(df$F0))
+  outl_na <- curr_na - init_na
+  if (report) {
+    print(paste0('Number of NAs removed from F0 track during automated outlier removal: ',
+                 outl_na))
+  }
   df <- normz(df, 'F0', speaker)
 
   if (!is.null(dep)) {
     for(d in dep) {
       df[[d]] <- ifelse(is.na(df[['F0']]), NA, df[[d]])
+      if (report) {
+        print(paste0('Number of NAs removed from ',
+                     d, ' track during automated outlier removal: ',
+                     sum(is.na(df[[d]]))))
+      }
       df <- normz(df, d, speaker)
     }
   }

@@ -10,6 +10,8 @@
 #' to be used as grouping variables.
 #' Optional; default is `NULL`, in which case automatic outlier removal will
 #' be based on means and standard deviation in the data at large.
+#' @param report A Boolean. If `TRUE` (default), prints a message stating
+#' how many values were recoded as `NA`.
 #'
 #' @return A data frame identical to `df` with outliers recoded as `NA`.
 #' @export
@@ -20,7 +22,8 @@
 #' sum(is.na(x$praatF0))
 outlier_rm <- function(df,
                        var,
-                       group_var=NULL) {
+                       group_var=NULL,
+                       report=TRUE) {
 
   if (!is.null(group_var)) {
     df <- df %>% dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) %>%
@@ -38,5 +41,12 @@ outlier_rm <- function(df,
                           !!as.name(var) < !!as.name(paste0('low', var)),
                         NA, !!as.name(var))
     )
+
+  if(report) {
+    print(paste0('The number of NAs removed during automated outlier removal: ',
+                 sum(is.na(df[[var]]))))
+  }
+
+  return(df)
 
 }

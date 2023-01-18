@@ -4,7 +4,7 @@
 \alias{outlier_rm}
 \title{Automated removal of outliers by group}
 \usage{
-outlier_rm(df, var, group_var = NULL)
+outlier_rm(df, var, group_var = NULL, report = TRUE)
 }
 \arguments{
 \item{df}{A data frame.}
@@ -16,6 +16,9 @@ should be removed.}
 to be used as grouping variables.
 Optional; default is \code{NULL}, in which case automatic outlier removal will
 be based on means and standard deviation in the data at large.}
+
+\item{report}{A Boolean. If \code{TRUE} (default), prints a message stating
+how many values were recoded as \code{NA}.}
 }
 \value{
 A data frame identical to \code{df} with outliers recoded as \code{NA}.

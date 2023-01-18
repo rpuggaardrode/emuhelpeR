@@ -48,6 +48,9 @@
 #' to be used as grouping variables for automatic outlier removal.
 #' Optional; default is `NULL`, in which case automatic outlier removal will
 #' be based on means and standard deviation in the data at large.
+#' @param report A Boolean. If `TRUE` (default), prints a message stating
+#' how many values in each track were
+#' recoded as `NA` during automated outlier removal.
 #'
 #' @return A data frame identical to `df` with formant outliers coded as `NA` and
 #' with the added columns `zF{n}` and `normF{n}`, and corresponding columns for
@@ -90,7 +93,8 @@ fn_proc <- function(df,
                     f0col='F0',
                     fndep=NULL,
                     speaker=NULL,
-                    group_var=NULL){
+                    group_var=NULL,
+                    report=TRUE){
 
   deps <- unlist(fndep)[which(1:length(unlist(fndep)) %% 2 != 0)]
   spec_cols <- c(fncol, deps, speaker, group_var)
@@ -112,7 +116,12 @@ fn_proc <- function(df,
       fn <- fncol[f]
     }
 
-    df <- outlier_rm(df, paste0('F', f), group_var)
+    df <- outlier_rm(df, paste0('F', f), group_var, report=F)
+    if (report) {
+      print(paste0('Number of NAs removed from F', f,
+                   ' track during automated outlier removal: ',
+                   sum(is.na(df[[paste0('F', f)]]))))
+    }
     df <- normz(df, paste0('F', f), speaker)
 
   }
@@ -122,6 +131,11 @@ fn_proc <- function(df,
       dep <- d[1]
       depfn <- d[2]
       df[[dep]] <- ifelse(is.na(df[[f0col]]) | is.na(df[[depfn]]), NA, df[[dep]])
+      if (report) {
+        print(paste0('Number of NAs removed from ',
+                     dep, ' track during automated outlier removal: ',
+                     sum(is.na(df[[dep]]))))
+      }
       df <- normz(df, dep, speaker)
     }
   }

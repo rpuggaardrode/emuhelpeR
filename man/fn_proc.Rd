@@ -10,7 +10,8 @@ fn_proc(
   f0col = "F0",
   fndep = NULL,
   speaker = NULL,
-  group_var = NULL
+  group_var = NULL,
+  report = TRUE
 )
 }
 \arguments{
@@ -46,6 +47,10 @@ values will be returned.}
 to be used as grouping variables for automatic outlier removal.
 Optional; default is \code{NULL}, in which case automatic outlier removal will
 be based on means and standard deviation in the data at large.}
+
+\item{report}{A Boolean. If \code{TRUE} (default), prints a message stating
+how many values in each track were
+recoded as \code{NA} during automated outlier removal.}
 }
 \value{
 A data frame identical to \code{df} with formant outliers coded as \code{NA} and
