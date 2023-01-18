@@ -81,7 +81,8 @@
 #' fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
 #' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
 #' dplyr::glimpse(x)
-#' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0', proc=F)
+#' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0',
+#' proc=FALSE)
 #' dplyr::glimpse(y)
 import_ssfftracks <- function(db_handle,
                             seg_list,
