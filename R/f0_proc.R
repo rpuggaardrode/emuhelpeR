@@ -58,8 +58,17 @@
 #' automatically imports F0 values and other available measures from an EMU
 #' database, performs outlier removal, normalizes values, and rescales.
 #'
-#' More information about the example data can be found in [seg_list] and
-#' [ssff_data].
+#' More information about the example data can be found in [?seg_list] and
+#' [?ssff_data].
+#'
+#' This general-purpose function was adapted from the data processing used in
+#' the following paper:
+#'
+#' Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
+#' Transphonologization of onset voicing: Revisiting Northern and Eastern
+#' Kmhmu. To be published in Phonetica.
+#'
+#' <https://doi.org/10.17605/OSF.IO/WV6QZ>
 #' @export
 #'
 #' @examples
