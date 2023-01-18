@@ -32,3 +32,7 @@ sum(is.na(ssff_data$praatF0))
 x <- outlier_rm(df=ssff_data, var='praatF0', group_var=c('speaker', 'vowel'))
 sum(is.na(x$praatF0))
 }
+\seealso{
+More information about the example data can be found in \link{seg_list} and
+\link{ssff_data}.
+}

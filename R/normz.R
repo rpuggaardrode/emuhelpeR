@@ -15,6 +15,8 @@
 #'
 #' @return A data frame identical to `df` with the added columns `z{var}` and
 #' `norm{var}`.
+#' @seealso More information about the example data can be found in [seg_list] and
+#' [ssff_data].
 #' @export
 #'
 #' @examples

@@ -66,6 +66,9 @@
 #' `fn_proc` is incorporated in the function [import_ssfftracks()] which
 #' automatically imports formant values and other available measures from an EMU
 #' database, performs outlier removal, normalizes values, and rescales.
+#'
+#' More information about the example data can be found in [seg_list] and
+#' [ssff_data].
 #' @export
 #'
 #' @examples

@@ -14,6 +14,8 @@
 #' how many values were recoded as `NA`.
 #'
 #' @return A data frame identical to `df` with outliers recoded as `NA`.
+#' @seealso More information about the example data can be found in [seg_list] and
+#' [ssff_data].
 #' @export
 #'
 #' @examples

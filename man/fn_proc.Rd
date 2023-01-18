@@ -115,4 +115,7 @@ been processed using \code{\link[=f0_proc]{f0_proc()}}.
 \code{fn_proc} is incorporated in the function \code{\link[=import_ssfftracks]{import_ssfftracks()}} which
 automatically imports formant values and other available measures from an EMU
 database, performs outlier removal, normalizes values, and rescales.
+
+More information about the example data can be found in \link{seg_list} and
+\link{ssff_data}.
 }

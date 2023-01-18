@@ -36,3 +36,7 @@ colnames(x)
 head(x$zeggF0, 20)
 head(x$normeggF0, 20)
 }
+\seealso{
+More information about the example data can be found in \link{seg_list} and
+\link{ssff_data}.
+}

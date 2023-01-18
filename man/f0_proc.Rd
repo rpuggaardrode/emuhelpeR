@@ -105,4 +105,7 @@ generated the raw data using \link{emuR} and EMU-SDMS.
 \code{f0_proc} is incorporated in the function \code{\link[=import_ssfftracks]{import_ssfftracks()}} which
 automatically imports F0 values and other available measures from an EMU
 database, performs outlier removal, normalizes values, and rescales.
+
+More information about the example data can be found in \link{seg_list} and
+\link{ssff_data}.
 }
