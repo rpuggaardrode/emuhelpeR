@@ -137,4 +137,7 @@ database using \code{\link[emuR:query]{emuR::query()}}.
 The data processing used in \code{import_ssfftracks} makes use of other \code{emuhelpeR}
 functions \code{\link[=f0_proc]{f0_proc()}}, \code{\link[=fn_proc]{fn_proc()}}, \code{\link[=outlier_rm]{outlier_rm()}}, and \code{\link[=normz]{normz()}}, which can
 all be used independently.
+
+More information about the example data can be found in \link{seg_list} and
+\link{ssff_data}.
 }

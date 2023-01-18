@@ -84,6 +84,9 @@
 #' The data processing used in `import_ssfftracks` makes use of other `emuhelpeR`
 #' functions [f0_proc()], [fn_proc()], [outlier_rm()], and [normz()], which can
 #' all be used independently.
+#'
+#' More information about the example data can be found in [seg_list] and
+#' [ssff_data].
 #' @export
 #'
 #' @examples
