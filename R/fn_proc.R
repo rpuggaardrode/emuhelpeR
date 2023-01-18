@@ -27,7 +27,7 @@
 #' formant measurements and columns with any other information to be accounted
 #' for.
 #' @param fncol One or more strings containing the names of columns in `df` that
-#' contain formant values. Default is `c('F1', 'F2', 'F3)`.
+#' contain formant values. Default is `c('F1', 'F2')`.
 #' @param f0col A string containing the name of the column in `df` that contains
 #' fundamental frequency values. Default is `F0`; this column will automatically
 #' be renamed `F0` if the data has already been processed using [f0_proc()].
@@ -86,7 +86,7 @@
 #' sum(is.na(x$F3))
 #' sum(is.na(x$H1A3c))
 fn_proc <- function(df,
-                    fncol=c('F1', 'F2', 'F3'),
+                    fncol=c('F1', 'F2'),
                     f0col='F0',
                     fndep=NULL,
                     speaker=NULL,

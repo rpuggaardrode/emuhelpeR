@@ -84,14 +84,13 @@
 #' fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
 #' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
 #' dplyr::glimpse(x)
-#' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0',
-#' proc=FALSE)
+#' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE)
 #' dplyr::glimpse(y)
 import_ssfftracks <- function(db_handle,
                             seg_list,
                             f0col='F0',
                             f0dep=NULL,
-                            fncol=NULL,
+                            fncol=c('F1', 'F2'),
                             fndep=NULL,
                             speaker=NULL,
                             group_var=NULL,
@@ -99,16 +98,7 @@ import_ssfftracks <- function(db_handle,
                             proc=TRUE
 ) {
 
-  fndeps <- unlist(fndep)[which(1:length(unlist(fndep)) %% 2 != 0)]
-  fixed <- c(f0col, f0dep, fncol, fndeps)
   trax <- emuR::list_ssffTrackDefinitions(db_handle)$name
-
-  if (any(!(fixed %in% trax))) {
-    stop (paste0('One or more of the specified ssff tracks \n',
-                 fixed,
-                 'are not available in the EMU database. Available tracks are \n',
-                 trax))
-  }
 
   init <- trax[1]
   tmp <- emuR::get_trackdata(db_handle, seg_list, ssffTrackName=init)
@@ -119,6 +109,17 @@ import_ssfftracks <- function(db_handle,
   }
 
   if (proc) {
+
+    fndeps <- unlist(fndep)[which(1:length(unlist(fndep)) %% 2 != 0)]
+    fixed <- c(f0col, f0dep, fncol, fndeps)
+
+    if (any(!(fixed %in% trax))) {
+      stop (paste0('One or more of the specified ssff tracks \n',
+                   fixed,
+                   'are not available in the EMU database. Available tracks are \n',
+                   trax))
+    }
+
     if (!is.null(f0col)) {
       tmp <- f0_proc(tmp, f0col, f0dep, speaker, group_var, timing_rm)
     }

@@ -6,7 +6,7 @@
 \usage{
 fn_proc(
   df,
-  fncol = c("F1", "F2", "F3"),
+  fncol = c("F1", "F2"),
   f0col = "F0",
   fndep = NULL,
   speaker = NULL,
@@ -19,7 +19,7 @@ formant measurements and columns with any other information to be accounted
 for.}
 
 \item{fncol}{One or more strings containing the names of columns in \code{df} that
-contain formant values. Default is \verb{c('F1', 'F2', 'F3)}.}
+contain formant values. Default is \code{c('F1', 'F2')}.}
 
 \item{f0col}{A string containing the name of the column in \code{df} that contains
 fundamental frequency values. Default is \code{F0}; this column will automatically

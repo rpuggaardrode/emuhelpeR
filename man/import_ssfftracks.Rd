@@ -9,7 +9,7 @@ import_ssfftracks(
   seg_list,
   f0col = "F0",
   f0dep = NULL,
-  fncol = NULL,
+  fncol = c("F1", "F2"),
   fndep = NULL,
   speaker = NULL,
   group_var = NULL,
@@ -109,8 +109,7 @@ f0dep='H1H2c', fncol=c('praatF1', 'praatF2', 'praatF3'),
 fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
 group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
 dplyr::glimpse(x)
-y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0',
-proc=FALSE)
+y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE)
 dplyr::glimpse(y)
 }
 \seealso{
