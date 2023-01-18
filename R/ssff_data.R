@@ -1,7 +1,7 @@
-#' Example segment list
+#' Example SSFF track data
 #'
 #' @format
-#' A tibble with 20 rows and 28 columns containing information about a small
+#' A tibble with 2823 rows and 43 columns containing information about a small
 #' subset of segments recorded for Kirby et al. (forthc.). To explore the
 #' data with EMU-SDMS, call the following:
 #'
@@ -16,4 +16,4 @@
 #' Kmhmu. To be published in Phonetica.
 #'
 #' <https://doi.org/10.17605/OSF.IO/WV6QZ>
-'seg_list'
+'ssff_data'
