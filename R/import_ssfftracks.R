@@ -50,6 +50,13 @@
 #' Optional; default is `NULL`. If `group_var=NULL` and `proc=TRUE`,
 #' automatic outlier removal will
 #' be based on means and standard deviation in the data at large.
+#' @param outlier_rm One or more strings containing the names of SSFF tracks
+#' (other than F0, formants, and their dependencies) for which values
+#' should be automatically removed if they fall outside of three standard
+#' deviations from the mean within the same group. See `group_var`.
+#' Optional; default is `NULL`. If `group_var=NULL` and `proc=TRUE`,
+#' automatic outlier removal will
+#' be based on means and standard deviation in the data at large.
 #' @param timing_rm An optional list with two arguments:
 #' * A string containing the label associated with a boundary in the data.
 #' Values that are measured sufficiently far from this boundary are recoded as
@@ -71,8 +78,8 @@
 #' database using [emuR::query()].
 #'
 #' The data processing used in `import_ssfftracks` makes use of other `emuhelpeR`
-#' functions [f0_proc()], [fn_proc()], and [normz()], which can all be used
-#' independently.
+#' functions [f0_proc()], [fn_proc()], [outlier_rm()], and [normz()], which can
+#' all be used independently.
 #' @export
 #'
 #' @examples
@@ -82,7 +89,8 @@
 #' x <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0',
 #' f0dep='H1H2c', fncol=c('praatF1', 'praatF2', 'praatF3'),
 #' fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
-#' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
+#' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250),
+#' outlier_rm='eggF0')
 #' dplyr::glimpse(x)
 #' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE)
 #' dplyr::glimpse(y)
@@ -94,6 +102,7 @@ import_ssfftracks <- function(db_handle,
                             fndep=NULL,
                             speaker=NULL,
                             group_var=NULL,
+                            outlier_rm=NULL,
                             timing_rm=NULL,
                             proc=TRUE
 ) {
@@ -111,7 +120,7 @@ import_ssfftracks <- function(db_handle,
   if (proc) {
 
     fndeps <- unlist(fndep)[which(1:length(unlist(fndep)) %% 2 != 0)]
-    fixed <- c(f0col, f0dep, fncol, fndeps)
+    fixed <- c(f0col, f0dep, fncol, fndeps, outlier_rm)
 
     if (any(!(fixed %in% trax))) {
       stop (paste0('One or more of the specified ssff tracks \n',
@@ -128,6 +137,12 @@ import_ssfftracks <- function(db_handle,
     }
 
     missing <- trax[which(!(trax %in% fixed))]
+
+    if (!is.null(outlier_rm)) {
+      for(v in outlier_rm) {
+        tmp <- outlier_rm(tmp, v, group_var)
+      }
+    }
 
     for(v in missing){
       tmp <- normz(tmp, v, speaker)

@@ -112,23 +112,7 @@ fn_proc <- function(df,
       fn <- fncol[f]
     }
 
-    if (!is.null(group_var)){
-      df <- df %>% dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) %>%
-        dplyr::mutate('uppF{f}' := mean(!!as.name(fn), na.rm=T) + 3*stats::sd(!!as.name(fn), na.rm=T),
-                      'lowF{f}' := mean(!!as.name(fn), na.rm=T) - 3*stats::sd(!!as.name(fn), na.rm=T))
-    } else {
-      df <- df %>%
-        dplyr::mutate('uppF{f}' := mean(!!as.name(fn), na.rm=T) + 3*stats::sd(!!as.name(fn), na.rm=T),
-                      'lowF{f}' := mean(!!as.name(fn), na.rm=T) - 3*stats::sd(!!as.name(fn), na.rm=T))
-    }
-
-    df <- df %>%
-      dplyr::mutate(
-        'F{f}' := ifelse((!!as.name(fn) > !!as.name(paste0('uppF', f)) |
-                          !!as.name(fn) < !!as.name(paste0('lowF', f))),
-                          NA, !!as.name(fn))
-      )
-
+    df <- outlier_rm(df, paste0('F', f), group_var)
     df <- normz(df, paste0('F', f), speaker)
 
   }

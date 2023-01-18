@@ -13,6 +13,7 @@ import_ssfftracks(
   fndep = NULL,
   speaker = NULL,
   group_var = NULL,
+  outlier_rm = NULL,
   timing_rm = NULL,
   proc = TRUE
 )
@@ -55,6 +56,14 @@ values will be returned.}
 
 \item{group_var}{One or more strings containing the names of columns in
 \code{seg_list} to be used as grouping variables for automatic outlier removal.
+Optional; default is \code{NULL}. If \code{group_var=NULL} and \code{proc=TRUE},
+automatic outlier removal will
+be based on means and standard deviation in the data at large.}
+
+\item{outlier_rm}{One or more strings containing the names of SSFF tracks
+(other than F0, formants, and their dependencies) for which values
+should be automatically removed if they fall outside of three standard
+deviations from the mean within the same group. See \code{group_var}.
 Optional; default is \code{NULL}. If \code{group_var=NULL} and \code{proc=TRUE},
 automatic outlier removal will
 be based on means and standard deviation in the data at large.}
@@ -107,7 +116,8 @@ dplyr::glimpse(seg_list)
 x <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0',
 f0dep='H1H2c', fncol=c('praatF1', 'praatF2', 'praatF3'),
 fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
-group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
+group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250),
+outlier_rm='eggF0')
 dplyr::glimpse(x)
 y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE)
 dplyr::glimpse(y)
@@ -119,6 +129,6 @@ This function assumes that the user has data stored in EMU database
 database using \code{\link[emuR:query]{emuR::query()}}.
 
 The data processing used in \code{import_ssfftracks} makes use of other \code{emuhelpeR}
-functions \code{\link[=f0_proc]{f0_proc()}}, \code{\link[=fn_proc]{fn_proc()}}, and \code{\link[=normz]{normz()}}, which can all be used
-independently.
+functions \code{\link[=f0_proc]{f0_proc()}}, \code{\link[=fn_proc]{fn_proc()}}, \code{\link[=outlier_rm]{outlier_rm()}}, and \code{\link[=normz]{normz()}}, which can
+all be used independently.
 }

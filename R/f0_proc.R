@@ -109,16 +109,7 @@ f0_proc <- function(df,
     }
   }
 
-  if(!is.null(group_var)){
-    df <- df %>% dplyr::group_by(dplyr::across(dplyr::all_of(group_var))) %>%
-      dplyr::mutate(uppF0 = mean(.data$F0, na.rm=T) + 3*stats::sd(.data$F0, na.rm=T),
-                    lowF0 = mean(.data$F0, na.rm=T) - 3*stats::sd(.data$F0, na.rm=T))
-  } else {
-    df <- df %>% dplyr::mutate(uppF0 = mean(.data$F0, na.rm=T) + 3*stats::sd(.data$F0, na.rm=T),
-                               lowF0 = mean(.data$F0, na.rm=T) - 3*stats::sd(.data$F0, na.rm=T))
-  }
-
-  df <- df %>% dplyr::mutate(F0 = ifelse((.data$F0 > .data$uppF0 | .data$F0 < .data$lowF0), NA, .data$F0))
+  df <- outlier_rm(df, 'F0', group_var)
   df <- normz(df, 'F0', speaker)
 
   if (!is.null(dep)) {
