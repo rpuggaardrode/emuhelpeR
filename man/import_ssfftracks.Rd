@@ -76,12 +76,15 @@ returns raw measurement values and does not perform any preprocessing.}
 \value{
 A data frame with the same structure as \code{seg_list} containing columns
 with all measurements available in the SSFF database. Optionally also contains
-columns with normalized and rescaled values for all measurements.
+columns with normalized and rescaled values for all measurements, labeled
+\verb{z\{variable\}} and \verb{norm\{variable\}} respectively.
 }
 \description{
 For a given EMU database and segment list, \code{import_ssfftracks} will import
 measurements from all available SSFF tracks and store them in a data frame
 with the same structure and information as the supplied segment list.
+Note that importing SSFF track measurements is fairly time demanding,
+so this function may take a while to run even for small datasets.
 }
 \details{
 \code{import_ssfftracks} also optionally performs automated outlier removal
