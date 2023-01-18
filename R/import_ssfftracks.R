@@ -3,6 +3,8 @@
 #' For a given EMU database and segment list, `import_ssfftracks` will import
 #' measurements from all available SSFF tracks and store them in a data frame
 #' with the same structure and information as the supplied segment list.
+#' Note that importing SSFF track measurements is fairly time demanding,
+#' so this function may take a while to run even for small datasets.
 #'
 #' `import_ssfftracks` also optionally performs automated outlier removal
 #' of fundamental frequency and formants by recoding
@@ -61,7 +63,8 @@
 #'
 #' @return A data frame with the same structure as `seg_list` containing columns
 #' with all measurements available in the SSFF database. Optionally also contains
-#' columns with normalized and rescaled values for all measurements.
+#' columns with normalized and rescaled values for all measurements, labeled
+#' `z{variable}` and `norm{variable}` respectively.
 #' @seealso This function assumes that the user has data stored in EMU database
 #' (see [emuR]), that the database has already been loaded into R using
 #' `emuR::load_emuDB()`, and has generated a list with relevant portions of that
