@@ -21,7 +21,7 @@
 #'
 #' @param db_handle The handle of an EMU database which is already loaded in R.
 #' @param seg_list A data frame containing a list of segments from which to
-#' import SSFF track measurements. Should be generated with [emuR::query].
+#' import SSFF track measurements. Should be generated with [emuR::query()].
 #' @param f0col A string containing the name of the SSFF track that contains
 #' fundamental frequency values. Can be checked using
 #' [emuR::list_ssffTrackDefinitions()].

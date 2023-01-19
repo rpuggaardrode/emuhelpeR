@@ -16,14 +16,15 @@ import_ssfftracks(
   outlier_rm = NULL,
   timing_rm = NULL,
   proc = TRUE,
-  report = TRUE
+  report = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
 \item{db_handle}{The handle of an EMU database which is already loaded in R.}
 
 \item{seg_list}{A data frame containing a list of segments from which to
-import SSFF track measurements. Should be generated with \link[emuR:query]{emuR::query}.}
+import SSFF track measurements. Should be generated with \code{\link[emuR:query]{emuR::query()}}.}
 
 \item{f0col}{A string containing the name of the SSFF track that contains
 fundamental frequency values. Can be checked using
@@ -87,6 +88,10 @@ returns raw measurement values and does not perform any preprocessing.}
 how many values in each track were
 recoded as \code{NA} during automated outlier removal and how many F0 values were
 \code{NA} in the raw data.}
+
+\item{verbose}{A Boolean. If \code{TRUE} (default), progress bars and further
+information will be shown as SSFF track data is extracted from the EMU
+database. See \code{\link[emuR:get_trackdata]{emuR::get_trackdata()}}.}
 }
 \value{
 A data frame with the same structure as \code{seg_list} containing columns
