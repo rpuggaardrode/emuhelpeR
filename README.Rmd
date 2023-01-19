@@ -1,0 +1,147 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# emuhelpeR: Convenience functions for working with emuR
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This package collects convenience functions for working with `emuR` and 
+EMU-SDMS. For more information on those tools, see 
+[this useful manual](https://ips-lmu.github.io/The-EMU-SDMS-Manual/index.html).
+
+For now, functions are available to bulk extract and pre-process
+[SSFF tracks](https://ips-lmu.github.io/The-EMU-SDMS-Manual/chap-sigDataExtr.html#extracting-pre-defined-tracks),
+with specific functions available for processing fundamental frequency,
+formants, and measures which depend directly on these.
+This can all be done in a single step with the function `import_ssfftracks()`,
+but the different steps can also be carried out independently.
+Some of the independent functions may well be useful for raw data that isn't
+generated in `emuR`.
+These functions are adapted from the data processing used in 
+[Kirby et al. forthc.](https://doi.org/10.17605/OSF.IO/WV6QZ).
+
+## At a glance
+
+The function `import_ssfftracks()` assumes that you have raw data stored
+in an EMU database which has already been loaded into R, and that you have
+generated a segment list with relevant portions of the data using 
+[the querying system](https://ips-lmu.github.io/The-EMU-SDMS-Manual/chap-querysys.html) 
+in `emuR`. Let's load some example data from
+[Kirby et al. forthc.](https://doi.org/10.17605/OSF.IO/WV6QZ)
+into R.
+
+```{r}
+datapath <- system.file('extdata/db', package='emuhelpeR')
+raw <- emuR::load_emuDB(datapath)
+```
+
+This data can be inspected in EMU-SDMS by typing `emuR::serve(raw)` in the R
+console. Let's have a look at a segment list I prepared:
+
+```{r}
+library(emuhelpeR)
+seg_list
+dplyr::glimpse(seg_list)
+```
+
+There are a bunch of functional measures available for this database, as the
+following prompt will tell us:
+
+```{r}
+emuR::list_ssffTrackDefinitions(raw)
+```
+
+Using `import_ssfftracks()` we can bulk extract all these measures from the
+segments in `seg_list` into a single data frame. I set `proc=FALSE`, 
+because right now we just want to extract the raw measures. `verbose` is set to
+`FALSE` to avoid printing progress bars that look ugly on GitHub.
+
+```{r}
+x <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE, verbose=FALSE)
+x
+dplyr::glimpse(x)
+```
+
+Neat! But if we skip `proc=FALSE` and set some more parameters, we can also do
+a bunch of preprocessing in the same step, such as by-speaker normalization and
+automated removal of outliers that fall outside three standard deviations from
+the mean within the same group. When the function is called, it will also print
+a message telling us how many outliers were removed from each track.
+
+* `f0col='praatF0'` specifies that F0 values are stored in the SSFF track
+`praatF0`. In this track, values of 0 should be recoded as `NA`, and outliers
+should be automatically removed after.
+* `f0dep='H1H2c'` specifies that the track `H1H2c` (the difference between the
+first two harmonics) is directly dependent on the F0 measurements, so for each
+F0 measure coded as `NA`, the corresponding `H1H2c` should also be coded as `NA`.
+* `fncol=c('praatF1', 'praatF2', 'praatF3')` specifies that the available formant
+measures F1-F3 are stored in the SSFF tracks `praatF1`, `praatF2`, and `praatF3`.
+Outliers are automatically removed.
+* `fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3'))` specifies that, respectively,
+`H1A1c` is a spectral measure that directly depends on F1 (and F0), and `H1A3c`
+is a spectral measure that directly depends on F3 (and F0). `H1A1c` values will
+be coded as `NA` if the corresponding F1 *or* F0 measure is `NA`, etc.
+* `speaker='speaker'` specifies that there is a column with speaker information
+in the `seg_list` data frame, and that column is labeled `speaker`. This is used
+for by-speaker normalization. 
+* `group_var=c('speaker', 'vowel')` specifies that the columns `speaker` and 
+`vowel` in `seg_list` should be used for determining which tokens should be 
+automatically removed; only tokens that are three standard deviations from the
+mean within-speaker and within-vowel are removed.
+* `timing_rm=list('cl', 250)` specifies that F0 measurements that are more than
+250 ms removed from a `cl` label in the data should be removed. 
+* `outlier_rm='eggF0'` specifies that, in addition to the automated outlier
+procedures that have already been applied, outliers should also be automatically
+removed from the SSFF track `eggF0`.
+
+```{r}
+y <- import_ssfftracks(db_handle=raw, seg_list=seg_list,
+                       f0col='praatF0', f0dep='H1H2c', 
+                       fncol=c('praatF1', 'praatF2', 'praatF3'),
+                       fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')),
+                       speaker='speaker', group_var=c('speaker', 'vowel'),
+                       timing_rm=list('cl', 250), outlier_rm='eggF0',
+                       verbose=FALSE)
+y
+dplyr::glimpse(y)
+```
+
+Notice that the `praatF0`, `praatF1` columns etc. have been renamed to `F0`,
+`F1`. Notice also that for each SSFF track has a corresponding column with
+z-score normalized values (e.g. `zF1`) *and* a corresponding column where these
+normalized values have been rescaled based on the overall mean and standard
+deviation of the data (e.g. `normF1`).
+
+`import_ssfftracks()` is very dependent on `emuR` and EMU-SDMS, but it
+incorporates several independent functions which can in principle be used on
+raw data generated with other software: `f0_proc()` for processing F0 and
+dependencies, `fn_proc()` for processing formants and dependencies,
+`outlier_rm` for automated removal of outliers, and `normz` for z-score 
+normalizing and rescaling by speaker. The syntax of these functions is similar
+to `import_ssfftracks()`.
+
+## Installation
+
+You can install the development version of `emuhelpeR` from GitHub with:
+
+```{r}
+# install.packages("devtools")
+# devtools::install_github("rpuggaardrode/emuhelpeR")
+```
+
+## References
+
+Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.) Transphonologization of onset voicing: Revisiting Northern and Eastern Kmhmu. (To be published in *Phonetica*.). DOI: [10.17605/OSF.IO/WV6QZ](https://doi.org/10.17605/OSF.IO/WV6QZ).

@@ -71,6 +71,9 @@
 #' how many values in each track were
 #' recoded as `NA` during automated outlier removal and how many F0 values were
 #' `NA` in the raw data.
+#' @param verbose A Boolean. If `TRUE` (default), progress bars and further
+#' information will be shown as SSFF track data is extracted from the EMU
+#' database. See [emuR::get_trackdata()].
 #'
 #' @return A data frame with the same structure as `seg_list` containing columns
 #' with all measurements available in the SSFF database. Optionally also contains
@@ -121,17 +124,18 @@ import_ssfftracks <- function(db_handle,
                             outlier_rm=NULL,
                             timing_rm=NULL,
                             proc=TRUE,
-                            report=TRUE
+                            report=TRUE,
+                            verbose=TRUE
 ) {
 
   trax <- emuR::list_ssffTrackDefinitions(db_handle)$name
 
   init <- trax[1]
-  tmp <- emuR::get_trackdata(db_handle, seg_list, ssffTrackName=init)
+  tmp <- emuR::get_trackdata(db_handle, seg_list, ssffTrackName=init, verbose=verbose)
   tmp[[init]] <- tmp[['T1']]
   tmp <- tmp[,-which(names(tmp)=='T1')]
   for (tr in trax[-1]){
-    tmp[[tr]] <- emuR::get_trackdata(db_handle, seg_list, ssffTrackName=tr)$T1
+    tmp[[tr]] <- emuR::get_trackdata(db_handle, seg_list, ssffTrackName=tr, verbose=verbose)$T1
   }
 
   if (proc) {
