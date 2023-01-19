@@ -109,9 +109,10 @@
 #' f0dep='H1H2c', fncol=c('praatF1', 'praatF2', 'praatF3'),
 #' fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
 #' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250),
-#' outlier_rm='eggF0')
+#' outlier_rm='eggF0', verbose=FALSE)
 #' dplyr::glimpse(x)
-#' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE)
+#' y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE,
+#' verbose=FALSE)
 #' dplyr::glimpse(y)
 import_ssfftracks <- function(db_handle,
                             seg_list,
