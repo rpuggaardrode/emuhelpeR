@@ -1,0 +1,142 @@
+{
+  "name": "F1-0002-car-rep1-Naam-37",
+  "annotates": "F1-0002-car-rep1-Naam-37.wav",
+  "sampleRate": 44100,
+  "levels": [
+    {
+      "name": "SAM",
+      "type": "SEGMENT",
+      "items": [
+        {
+          "id": 1,
+          "sampleStart": 0,
+          "sampleDur": 74506,
+          "labels": [
+            {
+              "name": "SAM",
+              "value": "Naam"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ORL",
+      "type": "SEGMENT",
+      "items": [
+        {
+          "id": 2,
+          "sampleStart": 0,
+          "sampleDur": 22494,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "sampleStart": 22495,
+          "sampleDur": 3609,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "rv"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "sampleStart": 26105,
+          "sampleDur": 5406,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "cl"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "sampleStart": 31512,
+          "sampleDur": 9453,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "op"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "sampleStart": 40966,
+          "sampleDur": 4975,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "cd"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "sampleStart": 45942,
+          "sampleDur": 28564,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LAR",
+      "type": "EVENT",
+      "items": [
+        {
+          "id": 8,
+          "samplePoint": 26105,
+          "labels": [
+            {
+              "name": "LAR",
+              "value": "ov"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "fromID": 1,
+      "toID": 2
+    },
+    {
+      "fromID": 1,
+      "toID": 3
+    },
+    {
+      "fromID": 1,
+      "toID": 4
+    },
+    {
+      "fromID": 1,
+      "toID": 5
+    },
+    {
+      "fromID": 1,
+      "toID": 6
+    },
+    {
+      "fromID": 1,
+      "toID": 7
+    },
+    {
+      "fromID": 4,
+      "toID": 8
+    }
+  ]
+}

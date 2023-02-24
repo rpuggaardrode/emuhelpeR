@@ -1,8 +1,8 @@
 #' Example segment list
 #'
 #' @format
-#' A tibble with 20 rows and 28 columns containing information about a small
-#' subset of segments recorded for Kirby et al. (forthc.). To explore the
+#' A tibble with 10 rows and 28 columns containing information about a small
+#' subset of segments recorded for Kirby et al. (2023). To explore the
 #' data with EMU-SDMS, call the following:
 #'
 #' `datapath <- system.file('extdata/db', package='emuhelpeR')`
@@ -11,9 +11,9 @@
 #'
 #' `emuR::serve(raw)`
 #'
-#' @source Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
+#' @source Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
 #' Transphonologization of onset voicing: Revisiting Northern and Eastern
-#' Kmhmu. To be published in Phonetica.
+#' Kmhmu. Phonetica. DOI:<https://doi.org/10.1515/phon-2022-0029>.
 #'
 #' <https://doi.org/10.17605/OSF.IO/WV6QZ>
 'seg_list'

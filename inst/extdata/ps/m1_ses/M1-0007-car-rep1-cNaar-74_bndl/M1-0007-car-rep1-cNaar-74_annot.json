@@ -1,0 +1,172 @@
+{
+  "name": "M1-0007-car-rep1-cNaar-74",
+  "annotates": "M1-0007-car-rep1-cNaar-74.wav",
+  "sampleRate": 44100,
+  "levels": [
+    {
+      "name": "SAM",
+      "type": "SEGMENT",
+      "items": [
+        {
+          "id": 1,
+          "sampleStart": 0,
+          "sampleDur": 84626,
+          "labels": [
+            {
+              "name": "SAM",
+              "value": "cNaar"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ORL",
+      "type": "SEGMENT",
+      "items": [
+        {
+          "id": 2,
+          "sampleStart": 0,
+          "sampleDur": 27145,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "sampleStart": 27146,
+          "sampleDur": 5296,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "rv"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "sampleStart": 32443,
+          "sampleDur": 4851,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "sampleStart": 37295,
+          "sampleDur": 1892,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "ps"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "sampleStart": 39188,
+          "sampleDur": 4143,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "cl"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "sampleStart": 43332,
+          "sampleDur": 6696,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "op"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "sampleStart": 50029,
+          "sampleDur": 3148,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": "cd"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "sampleStart": 53178,
+          "sampleDur": 31448,
+          "labels": [
+            {
+              "name": "ORL",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LAR",
+      "type": "EVENT",
+      "items": [
+        {
+          "id": 10,
+          "samplePoint": 39188,
+          "labels": [
+            {
+              "name": "LAR",
+              "value": "ov"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "fromID": 1,
+      "toID": 2
+    },
+    {
+      "fromID": 1,
+      "toID": 3
+    },
+    {
+      "fromID": 1,
+      "toID": 4
+    },
+    {
+      "fromID": 1,
+      "toID": 5
+    },
+    {
+      "fromID": 1,
+      "toID": 6
+    },
+    {
+      "fromID": 1,
+      "toID": 7
+    },
+    {
+      "fromID": 1,
+      "toID": 8
+    },
+    {
+      "fromID": 1,
+      "toID": 9
+    },
+    {
+      "fromID": 6,
+      "toID": 10
+    }
+  ]
+}
