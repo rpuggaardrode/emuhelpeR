@@ -31,9 +31,15 @@ but the different steps can also be carried out independently.
 Some of the independent functions may well be useful for raw data that isn't
 generated in `emuR`.
 These functions are adapted from the data processing used in 
-[Kirby et al. forthc.](https://doi.org/10.17605/OSF.IO/WV6QZ).
+[Kirby et al. 2023](https://doi.org/10.17605/OSF.IO/WV6QZ).
 
-## At a glance
+Another function provided by the package is `praatsauce2ssff()`,
+which allows users to add the output from [PraatSauce](https://github.com/kirbyj/praatsauce)
+to an EMU database. The function was written on the basis of PraatSauce output,
+but should in principle also work for output from [VoiceSauce](http://www.phonetics.ucla.edu/voicesauce/).
+This hasn't been tested though.
+
+## Importing and processing SSFF tracks
 
 The function `import_ssfftracks()` assumes that you have raw data stored
 in an EMU database which has already been loaded into R, and that you have
@@ -112,7 +118,7 @@ y <- import_ssfftracks(db_handle=raw, seg_list=seg_list,
                        f0col='praatF0', f0dep='H1H2c', 
                        fncol=c('praatF1', 'praatF2', 'praatF3'),
                        fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')),
-                       speaker='speaker', group_var=c('speaker', 'vowel'),
+                       speaker='session', group_var='session',
                        timing_rm=list('cl', 250), outlier_rm='eggF0',
                        verbose=FALSE)
 y
@@ -133,15 +139,43 @@ dependencies, `fn_proc()` for processing formants and dependencies,
 normalizing and rescaling by speaker. The syntax of these functions is similar
 to `import_ssfftracks()`.
 
+## Adding PraatSauce output to EMU database
+
+If the output of PraatSauce is loaded into R, it will look roughly like this:
+
+```{r}
+dplyr::glimpse(ps)
+```
+
+In order to add this to an existing EMU database with no SSFF tracks, you can 
+use the `praatsauce2ssff()` like so:
+
+```{r eval=FALSE}
+datapath_ps <- system.file('extdata/ps', package='emuhelpeR')
+ps_db <- emuR::load_emuDB(datapath)
+praatsauce2ssff(ps_output=ps, db_handle=ps_db, session_col='session')
+```
+
+Note that the `session_col` argument is only necessary if there are multiple sessions in the database.
+
+Subsequently, you can have a look at the SSFF tracks, such as the F0 track,
+in EMU by running e.g. the following:
+
+```{r eval=FALSE}
+sco <- emuR::get_signalCanvasesOrder(ps_db, 'default')
+emuR::set_signalCanvasesOrder(ps_db, 'default', c(sco, 'f0'))
+emuR::serve(ps_db)
+```
+
 ## Installation
 
 You can install the development version of `emuhelpeR` from GitHub with:
 
-```{r}
-# install.packages("devtools")
-# devtools::install_github("rpuggaardrode/emuhelpeR")
+```{r eval=FALSE}
+#install.packages("devtools")
+devtools::install_github("rpuggaardrode/emuhelpeR")
 ```
 
 ## References
 
-Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.) Transphonologization of onset voicing: Revisiting Northern and Eastern Kmhmu. (To be published in *Phonetica*.). DOI: [10.17605/OSF.IO/WV6QZ](https://doi.org/10.17605/OSF.IO/WV6QZ).
+Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023) Transphonologization of onset voicing: Revisiting Northern and Eastern Kmhmu. *Phonetica*. DOI: [10.1515/phon-2022-0029](https://doi.org/10.1515/phon-2022-0029).
