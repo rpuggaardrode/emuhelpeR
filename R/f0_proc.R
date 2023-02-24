@@ -58,15 +58,15 @@
 #' automatically imports F0 values and other available measures from an EMU
 #' database, performs outlier removal, normalizes values, and rescales.
 #'
-#' More information about the example data can be found in [?seg_list] and
-#' [?ssff_data].
+#' More information about the example data can be found in [seg_list] and
+#' [ssff_data].
 #'
 #' This general-purpose function was adapted from the data processing used in
 #' the following paper:
 #'
-#' Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
+#' Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
 #' Transphonologization of onset voicing: Revisiting Northern and Eastern
-#' Kmhmu. To be published in Phonetica.
+#' Kmhmu. Phonetica. DOI:<https://doi.org/10.1515/phon-2022-0029>.
 #'
 #' <https://doi.org/10.17605/OSF.IO/WV6QZ>
 #' @export
@@ -80,8 +80,8 @@
 #' #Uses both speaker and vowel variables for outlier removal; F0 values and
 #' #dependents are recoded as NA if they are more than 250 ms from boundaries
 #' #labeled 'cl'.
-#' x <- f0_proc(df=ssff_data, f0col='praatF0', dep='H1H2c', speaker='speaker',
-#' group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
+#' x <- f0_proc(df=ssff_data, f0col='praatF0', dep='H1H2c', speaker='session',
+#' group_var=c('session'), timing_rm=list('cl', 250))
 #' colnames(x)
 #' head(x$F0, 20)
 #' head(x$zF0, 20)
