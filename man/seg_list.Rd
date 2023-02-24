@@ -5,8 +5,8 @@
 \alias{seg_list}
 \title{Example segment list}
 \format{
-A tibble with 20 rows and 28 columns containing information about a small
-subset of segments recorded for Kirby et al. (forthc.). To explore the
+A tibble with 10 rows and 28 columns containing information about a small
+subset of segments recorded for Kirby et al. (2023). To explore the
 data with EMU-SDMS, call the following:
 
 \code{datapath <- system.file('extdata/db', package='emuhelpeR')}
@@ -16,9 +16,9 @@ data with EMU-SDMS, call the following:
 \code{emuR::serve(raw)}
 }
 \source{
-Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
+Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
 Transphonologization of onset voicing: Revisiting Northern and Eastern
-Kmhmu. To be published in Phonetica.
+Kmhmu. Phonetica. DOI:\url{https://doi.org/10.1515/phon-2022-0029}.
 
 \url{https://doi.org/10.17605/OSF.IO/WV6QZ}
 }

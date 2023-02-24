@@ -39,9 +39,9 @@ More information about the example data can be found in \link{seg_list} and
 This general-purpose function was adapted from the data processing used in
 the following paper:
 
-Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
+Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
 Transphonologization of onset voicing: Revisiting Northern and Eastern
-Kmhmu. To be published in Phonetica.
+Kmhmu. Phonetica. DOI:\url{https://doi.org/10.1515/phon-2022-0029}.
 
 \url{https://doi.org/10.17605/OSF.IO/WV6QZ}
 }

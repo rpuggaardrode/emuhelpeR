@@ -3,6 +3,13 @@
 \name{import_ssfftracks}
 \alias{import_ssfftracks}
 \title{Import all available SSFF tracks from EMU database and process the raw data}
+\source{
+Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
+Transphonologization of onset voicing: Revisiting Northern and Eastern
+Kmhmu. Phonetica. DOI:\url{https://doi.org/10.1515/phon-2022-0029}.
+
+\url{https://doi.org/10.17605/OSF.IO/WV6QZ}
+}
 \usage{
 import_ssfftracks(
   db_handle,
@@ -126,8 +133,8 @@ raw <- emuR::load_emuDB(datapath)
 dplyr::glimpse(seg_list)
 x <- import_ssfftracks(db_handle=raw, seg_list=seg_list, f0col='praatF0',
 f0dep='H1H2c', fncol=c('praatF1', 'praatF2', 'praatF3'),
-fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='speaker',
-group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250),
+fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')), speaker='session',
+group_var='session', timing_rm=list('cl', 250),
 outlier_rm='eggF0', verbose=FALSE)
 dplyr::glimpse(x)
 y <- import_ssfftracks(db_handle=raw, seg_list=seg_list, proc=FALSE,
@@ -149,10 +156,4 @@ More information about the example data can be found in \link{seg_list} and
 
 This general-purpose function was adapted from the data processing used in
 the following paper:
-
-Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
-Transphonologization of onset voicing: Revisiting Northern and Eastern
-Kmhmu. To be published in Phonetica.
-
-\url{https://doi.org/10.17605/OSF.IO/WV6QZ}
 }

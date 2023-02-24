@@ -8,6 +8,14 @@
 \description{
 Various convenience functions for working with the phonetic corpus tools in the emuR package.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/rpuggaardrode/emuhelpeR}
+  \item Report bugs at \url{https://github.com/rpuggaardrode/emuhelpeR/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Rasmus Puggaard-Rode \email{r.puggaard@phonetik.uni-muenchen.de} (\href{https://orcid.org/0000-0003-4522-9987}{ORCID})
 

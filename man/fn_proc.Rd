@@ -91,11 +91,11 @@ sum(is.na(ssff_data$praatF0))
 sum(is.na(ssff_data$praatF3))
 sum(is.na(ssff_data$H1A3c))
 #see ?f0_proc
-y <- f0_proc(df=ssff_data, f0col='praatF0', dep='H1H2c', speaker='speaker',
-group_var=c('speaker', 'vowel'), timing_rm=list('cl', 250))
+y <- f0_proc(df=ssff_data, f0col='praatF0', dep='H1H2c', speaker='session',
+group_var='session', timing_rm=list('cl', 250))
 x <- fn_proc(df=y, fncol=c('praatF1', 'praatF2', 'praatF3'),
 fndep=list(c('H1A1c', 'F1'), c('H1A3c', 'F3')),
-speaker='speaker', group_var=c('speaker', 'vowel'))
+speaker='session', group_var='session')
 head(x$F3, 20)
 head(x$H1A3c, 20)
 head(x$zF3, 20)
@@ -122,9 +122,9 @@ More information about the example data can be found in \link{seg_list} and
 This general-purpose function was adapted from the data processing used in
 the following paper:
 
-Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (forthc.)
+Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
 Transphonologization of onset voicing: Revisiting Northern and Eastern
-Kmhmu. To be published in Phonetica.
+Kmhmu. Phonetica. DOI:\url{https://doi.org/10.1515/phon-2022-0029}.
 
 \url{https://doi.org/10.17605/OSF.IO/WV6QZ}
 }
