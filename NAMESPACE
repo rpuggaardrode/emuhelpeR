@@ -2,9 +2,13 @@
 
 export("%>%")
 export(add_signal_canvas)
+export(dct2ssff)
+export(dct_ts)
 export(f0_proc)
 export(fn_proc)
 export(import_ssfftracks)
+export(moments2ssff)
+export(moments_ts)
 export(normz)
 export(outlier_rm)
 export(praatsauce2ssff)

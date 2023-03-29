@@ -21,13 +21,18 @@ generated in `emuR`. These functions are adapted from the data
 processing used in [Kirby et
 al. 2023](https://doi.org/10.17605/OSF.IO/WV6QZ).
 
-Another function provided by the package is `praatsauce2ssff()`, which
+The package also provides different functions for adding SSFF tracks to
+existing EMU databases. One such function is `praatsauce2ssff()`, which
 allows users to add the output from
 [PraatSauce](https://github.com/kirbyj/praatsauce) to an EMU database.
 The function was written on the basis of PraatSauce output, but should
 in principle also work for output from
 [VoiceSauce](http://www.phonetics.ucla.edu/voicesauce/). This hasn’t
-been tested though.
+been tested though. Additionally there are functions for calculating
+spectral moments and DCT coefficients of spectra generated over
+equidistant time steps for all the sound files of an EMU database. These
+are called `moments2ssff()` and `dct2ssff()`. See the help files for
+more.
 
 ## Importing and processing SSFF tracks
 
