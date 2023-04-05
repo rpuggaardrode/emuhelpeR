@@ -4,15 +4,11 @@
 \alias{load_db}
 \title{Load EMU-SDMS database object}
 \usage{
-load_db(dir = NULL, recursive = TRUE)
+load_db(recursive = TRUE)
 }
 \arguments{
-\item{dir}{String giving the directory to search for EMU-SDMS databases.
-Default is \code{NULL},
-in which case the function operates on the working directory.}
-
 \item{recursive}{Logical; default is \code{TRUE}. Whether or not to recursively
-search subdirectories of \code{dir} (usually the working directory) for
+search subdirectories of \code{dir} for
 EMU databases.}
 }
 \value{

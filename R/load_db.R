@@ -4,11 +4,8 @@
 #' its name whenever there is only one EMU-SDMS database in the working
 #' directory and its subdirectories.
 #'
-#' @param dir String giving the directory to search for EMU-SDMS databases.
-#' Default is `NULL`,
-#' in which case the function operates on the working directory.
 #' @param recursive Logical; default is `TRUE`. Whether or not to recursively
-#' search subdirectories of `dir` (usually the working directory) for
+#' search subdirectories of `dir` for
 #' EMU databases.
 #'
 #' @return A list containing an EMU-SDMS database object.
@@ -19,13 +16,9 @@
 #' # don't run
 #' # x <- load_db()
 #' # serve()
-load_db <- function(dir=NULL, recursive=TRUE) {
+load_db <- function(recursive=TRUE) {
 
-  if (is.null(dir)) {
-    dir <- getwd()
-  }
-
-  dirs <- list.dirs(path = dir, full.names=F, recursive=recursive)
+  dirs <- list.dirs(full.names=F, recursive=recursive)
   emuDB <- which(stringr::str_sub(dirs, start=-5) == 'emuDB')
 
   if (length(emuDB) != 1) {
@@ -33,7 +26,6 @@ load_db <- function(dir=NULL, recursive=TRUE) {
                 'Please specify a directory with only one emuDB.'))
   }
 
-  tmp <- emuR::load_emuDB(dirs[emuDB])
-  return(tmp)
+  emuR::load_emuDB(dirs[emuDB])
 
 }
