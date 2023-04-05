@@ -58,7 +58,7 @@ dct_ts <- function(snd_vector,
   }
 
   if (plot) {
-    par(mfrow=c(2,2))
+    graphics::par(mfrow=c(2,2))
     plot(tmp$t, tmp$k0, type='l', ylab='k0', xlab='Time (ms)')
     plot(tmp$t, tmp$k1, type='l', ylab='k1', xlab='Time (ms)')
     plot(tmp$t, tmp$k2, type='l', ylab='k2', xlab='Time (ms)')
