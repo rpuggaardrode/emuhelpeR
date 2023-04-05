@@ -84,4 +84,6 @@ moments2ssff <- function(db_handle,
     emuR::add_ssffTrackDefinition(db_handle, m, m, m)
   }
 
+  unlink('ssff', recursive=T)
+
 }

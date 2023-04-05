@@ -88,4 +88,6 @@ praatsauce2ssff <- function(ps_output,
 
   for (c in cn) {emuR::add_ssffTrackDefinition(db_handle, c, c, c)}
 
+  unlink('ssff', recursive=T)
+
 }

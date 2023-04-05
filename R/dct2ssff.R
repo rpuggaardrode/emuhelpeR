@@ -82,4 +82,6 @@ dct2ssff <- function(db_handle, freq_ceiling=8000, step=5) {
     emuR::add_ssffTrackDefinition(db_handle, k, k, k)
   }
 
+  unlink('ssff', recursive=T)
+
 }
