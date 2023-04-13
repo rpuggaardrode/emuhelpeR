@@ -2,28 +2,31 @@
 % Please edit documentation in R/load_db.R
 \name{load_db}
 \alias{load_db}
-\title{Load EMU-SDMS database object}
+\title{Load and serve EMU-SDMS database object}
 \usage{
-load_db(recursive = TRUE)
+load_db(recursive = TRUE, serve = TRUE)
 }
 \arguments{
 \item{recursive}{Logical; default is \code{TRUE}. Whether or not to recursively
 search subdirectories of \code{dir} for
 EMU databases.}
+
+\item{serve}{Logical; whether or not to serve the database in a browser window.}
 }
 \value{
 A list containing an EMU-SDMS database object.
 }
 \description{
-Convenience function for loading an EMU-SDMS database without specifying
+Convenience function for loading and serving EMU-SDMS database in a single
+command without specifying
 its name whenever there is only one EMU-SDMS database in the working
 directory and its subdirectories.
 }
 \examples{
 # don't run
 # x <- load_db()
-# serve()
 }
 \seealso{
-This is a wrapper for the function \code{\link[emuR:load_emuDB]{emuR::load_emuDB()}}.
+This is a wrapper for the functions \code{\link[emuR:load_emuDB]{emuR::load_emuDB()}} and
+\code{\link[emuR:serve]{emuR::serve()}}.
 }
