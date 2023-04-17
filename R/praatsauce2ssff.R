@@ -36,7 +36,7 @@ praatsauce2ssff <- function(ps_output,
                             db_handle,
                             session_col=NULL) {
 
-  ps <- ps_output
+  ps <- as.data.frame(ps_output)
   sr <- round(1 / (ps[[2,'t_ms']] - ps[1,'t_ms']), 0)
   col1 <- which(colnames(ps) == 'f0')
   cols <- col1:ncol(ps)
