@@ -53,7 +53,11 @@ praatsauce2ssff <- function(ps_output,
     dir.create(paste0(getwd(), '/ssff/', s))
     ssff_path <- paste0(getwd(), '/ssff/', s)
 
-    tmp_s <- ps[which(ps[[session_col]]==s),]
+    if (is.null(session_col)) {
+      tmp_s <- ps
+    } else {
+      tmp_s <- ps[which(ps[[session_col]]==s),]
+    }
     fls <- unique(tmp_s[['Filename']])
 
     for (f in fls) {
