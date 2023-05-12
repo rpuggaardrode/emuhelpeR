@@ -44,7 +44,7 @@ praatsauce2ssff <- function(ps_output,
   dir.create(paste0(getwd(), '/ssff/'))
 
   if (is.null(session_col)) {
-    sessions <- '0000_ses'
+    sessions <- '0000'
   } else {
     sessions <- unique(ps[[session_col]])
   }
