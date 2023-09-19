@@ -86,7 +86,7 @@ praatsauce2ssff <- function(ps_output,
 
     }
 
-    for (c in cn) {emuR::add_files(db_handle, ssff_path, paste0('\\.', c), s)}
+    for (c in cn) {emuR::add_files(db_handle, ssff_path, c, s)}
 
   }
 

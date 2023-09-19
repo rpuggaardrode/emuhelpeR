@@ -75,7 +75,7 @@ moments2ssff <- function(db_handle,
     }
 
     for (m in c('cog', 'sd', 'skew', 'kurtosis')) {
-      emuR::add_files(db_handle, ssff_path, paste0('\\.', m), strsplit(s, '_ses')[[1]])
+      emuR::add_files(db_handle, ssff_path, m, strsplit(s, '_ses')[[1]])
     }
 
   }

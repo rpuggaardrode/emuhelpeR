@@ -73,7 +73,7 @@ dct2ssff <- function(db_handle, freq_ceiling=8000, step=5) {
     }
 
     for (k in c('k0', 'k1', 'k2', 'k3')) {
-      emuR::add_files(db_handle, ssff_path, paste0('\\.', k), strsplit(s, '_ses')[[1]])
+      emuR::add_files(db_handle, ssff_path, k, strsplit(s, '_ses')[[1]])
     }
 
   }
