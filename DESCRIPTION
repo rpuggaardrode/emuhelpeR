@@ -1,6 +1,6 @@
 Package: emuhelpeR
 Title: Convenience functions for working with emuR
-Version: 0.0.7
+Version: 0.1.0
 Authors@R: 
     person("Rasmus", "Puggaard-Rode", , "r.puggaard@phonetik.uni-muenchen.de", 
           role = c("aut", "cre"),
@@ -23,6 +23,7 @@ Imports:
     soundgen,
     stats,
     stringr,
+    utils,
     wrassp
 Depends: 
     R (>= 2.10)
