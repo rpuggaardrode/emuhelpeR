@@ -52,7 +52,7 @@ moments_ts <- function(snd_vector,
     spec <- phonTools::spectralslice(slice, fs=freq_ceiling*2, show=F)
     mom <- emuR::moments(spec[,2], spec[,1], minval=T)
     tmp$cog[i] <- mom[1]
-    tmp$sd[i] <- mom[2]
+    tmp$sd[i] <- sqrt(mom[2])
     tmp$skew[i] <- mom[3]
     tmp$kurtosis[i] <- mom[4]
   }
