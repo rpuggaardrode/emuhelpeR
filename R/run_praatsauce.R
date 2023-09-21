@@ -10,9 +10,9 @@
 #' to be processed are stored. Must be the full name, there's no
 #' path extension.
 #' @param tg_loc String giving the name of a directory where the .TextGrid files
-#' to be processed are stored. Default is `NULL`; if no directory is provided,
-#' `run_praatsauce` assumes that .TextGrid files are stored in the same directory
-#' as `wav_loc`.
+#' to be processed are stored. Default is `'none'`; in this case, the function
+#' assumes that there are no TextGrids and that the entire files should be
+#' analyzed.
 #' @param out_loc String giving the name of a directory where the PraatSauce
 #' output should be stored. Default is `NULL`; if no directory is provided,
 #' the output is stored in a temporary folder.
@@ -76,7 +76,7 @@
 #' Praat's estimates are used. Note that the Hawks and Miller formula can only
 #' be used if pitch is also measured.
 #'
-#' @return A data frame containing with columns giving information about the
+#' @return A data frame with columns giving information about the
 #' sound file imported from the name of the sound file, information about
 #' the time at which measures were estimated, and the estimated measures
 #' themselves.
@@ -92,14 +92,12 @@
 #'
 #' @examples
 #' # Not right now
-#' 2+2
 run_praatsauce <- function(wav_loc,
-                           tg_loc=NULL,
+                           tg_loc='none',
                            out_loc=NULL,
                            out_file='tmp.txt',
                            praat_loc='praat',
                            channel=1,
-                           run_whole_file=TRUE,
                            interval_tier=1,
                            skip_these_labels='^$',
                            point_tier=NULL,
@@ -133,7 +131,10 @@ run_praatsauce <- function(wav_loc,
     measure <- '"n equidistant points"'
   }
 
-  if (run_whole_file) {
+  if (tg_loc == 'none') {
+    dir.create(paste0(getwd(), '/tgtmp'))
+    tg_loc <- paste0(getwd(), '/tgtmp')
+
     fls <- list.files(wav_loc, pattern='*.wav') %>%
       stringr::str_remove_all('.wav')
 
@@ -142,7 +143,7 @@ run_praatsauce <- function(wav_loc,
       rPraat::tg.createNewTextGrid(0, snd$duration) %>%
         rPraat::tg.insertNewIntervalTier(newTierName='dummy') %>%
         rPraat::tg.setLabel(1, 1, f) %>%
-        rPraat::tg.write(paste0(wav_loc, '/', f, '.TextGrid'), format='text')
+        rPraat::tg.write(paste0(getwd(), '/tgtmp/', f, '.TextGrid'), format='text')
     }
   }
 
@@ -160,29 +161,12 @@ run_praatsauce <- function(wav_loc,
     bool <- as.numeric(bool)
   }
 
-  if (length(point_tier_labels) == 0) {
-    point_tier_labels <- 0
-  }
+  if (length(point_tier_labels) == 0) point_tier_labels <- 0
+  if (length(timeStep) == 0) timeStep <- 0
+  if (length(out_loc) == 0) out_loc <- tempdir()
+  if (length(point_tier) == 0) point_tier <- 0
 
-  if (length(timeStep) == 0) {
-    timeStep <- 0
-  }
-
-  if (length(tg_loc) == 0) {
-    tg_loc <- wav_loc
-  }
-
-  if (length(out_loc) == 0) {
-    out_loc <- tempdir()
-  }
-
-  if (length(point_tier) == 0) {
-    point_tier <- 0
-  }
-
-  if (stringr::str_sub(out_loc, start=-1) != '/') {
-    out_loc <- paste0(out_loc, '/')
-  }
+  if (stringr::str_sub(out_loc, start=-1) != '/') out_loc <- paste0(out_loc, '/')
 
   ps <- system.file('extdata/ps-script/shellSauce.praat', package='emuhelpeR')
   call <- stringr::str_glue('{praat_loc} {ps} {wav_loc} {tg_loc} {out_loc} {out_file} ',
@@ -196,28 +180,12 @@ run_praatsauce <- function(wav_loc,
 
   system(call)
   out <- utils::read.csv(paste0(out_loc, out_file))
+
+  list.files(wav_loc, '*.Pitch', recursive=TRUE, full.names=TRUE) %>%
+    file.remove()
+  list.files(wav_loc, '*.Formant', recursive=TRUE, full.names=TRUE) %>%
+    file.remove()
+  if (dir.exists('tgtmp')) unlink('tgtmp', recursive=TRUE)
+
   return(out)
-
-  if (run_whole_file){
-    list.files(wav_loc, pattern='*.TextGrid', full.names=T) %>% file.remove()
-  }
-
-}
-
-dynamic_minmax <- function(...) {
-  tmp <- run_praatsauce(formantMeasures=F, spectralMeasures=F, ...)
-  tmp$f0[which(tmp$f0 == 0)] <- NA
-  q <- quantile(tmp$f0, probs=c(0.25, 0.75), na.rm=T, names=F)
-  tmp_dyn <- run_praatsauce(f0min=q[1], f0max=q[2], ...)
-  return(tmp_dyn)
-}
-
-run_ps_dynamic_minmax <- function(directory, ...) {
-  speakers <- list.dirs(directory, full.names=T, recursive=F)
-  ps_dyn <- dynamic_minmax(wav_loc=speakers[1])
-  for (s in speakers[-1]) {
-    tmp <- dynamic_minmax(wav_loc=s)
-    ps_dyn <- rbind(ps_dyn, tmp)
-  }
-  return(ps_dyn)
 }

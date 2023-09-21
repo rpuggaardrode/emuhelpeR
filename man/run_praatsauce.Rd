@@ -6,7 +6,7 @@
 \usage{
 run_praatsauce(
   wav_loc,
-  tg_loc = NULL,
+  tg_loc = "none",
   out_loc = NULL,
   out_file = "tmp.txt",
   praat_loc = "praat",
@@ -39,12 +39,13 @@ run_praatsauce(
 }
 \arguments{
 \item{wav_loc}{String giving the name of a directory where the .wav files
-to be processed are stored.}
+to be processed are stored. Must be the full name, there's no
+path extension.}
 
 \item{tg_loc}{String giving the name of a directory where the .TextGrid files
-to be processed are stored. Default is \code{NULL}; if no directory is provided,
-\code{run_praatsauce} assumes that .TextGrid files are stored in the same directory
-as \code{wav_loc}.}
+to be processed are stored. Default is \code{'none'}; in this case, the function
+assumes that there are no TextGrids and that the entire files should be
+analyzed.}
 
 \item{out_loc}{String giving the name of a directory where the PraatSauce
 output should be stored. Default is \code{NULL}; if no directory is provided,
@@ -137,7 +138,7 @@ Praat's estimates are used. Note that the Hawks and Miller formula can only
 be used if pitch is also measured.}
 }
 \value{
-A data frame containing with columns giving information about the
+A data frame with columns giving information about the
 sound file imported from the name of the sound file, information about
 the time at which measures were estimated, and the estimated measures
 themselves.
@@ -151,7 +152,6 @@ spectral slope and harmonics-to-noise ratio.
 }
 \examples{
 # Not right now
-2+2
 }
 \seealso{
 As mentioned above, this function is a wrapper for a suite of
