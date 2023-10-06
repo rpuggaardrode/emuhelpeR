@@ -14,6 +14,8 @@
 #' the time at which measures were estimated, and the estimated measures
 #' themselves.
 #'
+#' @export
+#'
 #' @examples
 #' #not now
 dynamic_minmax <- function(fm=TRUE, sm=TRUE, ...) {
