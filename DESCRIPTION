@@ -1,6 +1,6 @@
 Package: emuhelpeR
 Title: Convenience functions for working with emuR
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: 
     person("Rasmus", "Puggaard-Rode", , "r.puggaard@phonetik.uni-muenchen.de", 
           role = c("aut", "cre"),

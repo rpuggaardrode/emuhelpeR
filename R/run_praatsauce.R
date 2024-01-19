@@ -169,7 +169,7 @@ run_praatsauce <- function(wav_loc,
   if (stringr::str_sub(out_loc, start=-1) != '/') out_loc <- paste0(out_loc, '/')
 
   ps <- system.file('extdata/ps-script/shellSauce.praat', package='emuhelpeR')
-  call <- stringr::str_glue('{praat_loc} {ps} {wav_loc} {tg_loc} {out_loc} {out_file} ',
+  call <- stringr::str_glue('"{praat_loc}" "{ps}" "{wav_loc}" "{tg_loc}" "{out_loc}" "{out_file}" ',
                             '1 {channel} {interval_tier} "{skip_these_labels}" {point_tier} ',
                             '{point_tier_labels} "{separator}" 0 {measure} {points} ',
                             '{resample_to_16k} {pitchTracking} {formantMeasures} ',
