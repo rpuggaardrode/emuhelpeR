@@ -1,7 +1,7 @@
-#' Import all available SSFF tracks from EMU database and process the raw data
+#' Import SSFF tracks from EMU database and process the raw data
 #'
 #' For a given EMU database and segment list, `import_ssfftracks` will import
-#' measurements from all available SSFF tracks and store them in a data frame
+#' measurements from available SSFF tracks and store them in a data frame
 #' with the same structure and information as the supplied segment list.
 #' Note that importing SSFF track measurements is fairly time demanding,
 #' so this function may take a while to run even for small datasets.
@@ -22,6 +22,8 @@
 #' @param db_handle The handle of an EMU database which is already loaded in R.
 #' @param seg_list A data frame containing a list of segments from which to
 #' import SSFF track measurements. Should be generated with [emuR::query()].
+#' @param tracks_to_import Vector of strings giving the names of SSFF tracks
+#' to import. Default is `NULL`, in which case all tracks are imported.
 #' @param f0col A string containing the name of the SSFF track that contains
 #' fundamental frequency values. Can be checked using
 #' [emuR::list_ssffTrackDefinitions()].
@@ -116,6 +118,7 @@
 #' dplyr::glimpse(y)
 import_ssfftracks <- function(db_handle,
                             seg_list,
+                            tracks_to_import=NULL,
                             f0col='F0',
                             f0dep=NULL,
                             fncol=c('F1', 'F2'),
@@ -129,7 +132,12 @@ import_ssfftracks <- function(db_handle,
                             verbose=TRUE
 ) {
 
-  trax <- emuR::list_ssffTrackDefinitions(db_handle)$name
+  if (is.null(tracks_to_import)) {
+    trax <- emuR::list_ssffTrackDefinitions(db_handle)$name
+  } else {
+    trax <- tracks_to_import
+  }
+
 
   init <- trax[1]
   tmp <- emuR::get_trackdata(db_handle, seg_list, ssffTrackName=init, verbose=verbose)

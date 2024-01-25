@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_ssfftracks.R
 \name{import_ssfftracks}
 \alias{import_ssfftracks}
-\title{Import all available SSFF tracks from EMU database and process the raw data}
+\title{Import SSFF tracks from EMU database and process the raw data}
 \source{
 Kirby, James, Marc Brunelle & Pittayawat Pittayaporn (2023)
 Transphonologization of onset voicing: Revisiting Northern and Eastern
@@ -14,6 +14,7 @@ Kmhmu. Phonetica. DOI:\url{https://doi.org/10.1515/phon-2022-0029}.
 import_ssfftracks(
   db_handle,
   seg_list,
+  tracks_to_import = NULL,
   f0col = "F0",
   f0dep = NULL,
   fncol = c("F1", "F2"),
@@ -32,6 +33,9 @@ import_ssfftracks(
 
 \item{seg_list}{A data frame containing a list of segments from which to
 import SSFF track measurements. Should be generated with \code{\link[emuR:query]{emuR::query()}}.}
+
+\item{tracks_to_import}{Vector of strings giving the names of SSFF tracks
+to import. Default is \code{NULL}, in which case all tracks are imported.}
 
 \item{f0col}{A string containing the name of the SSFF track that contains
 fundamental frequency values. Can be checked using
@@ -108,7 +112,7 @@ columns with normalized and rescaled values for all measurements, labeled
 }
 \description{
 For a given EMU database and segment list, \code{import_ssfftracks} will import
-measurements from all available SSFF tracks and store them in a data frame
+measurements from available SSFF tracks and store them in a data frame
 with the same structure and information as the supplied segment list.
 Note that importing SSFF track measurements is fairly time demanding,
 so this function may take a while to run even for small datasets.
