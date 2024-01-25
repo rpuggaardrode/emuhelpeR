@@ -30,9 +30,18 @@ DFT spectra over equidistant time steps and calculate the first four
 spectral moments of each spectrum.
 }
 \examples{
-datapath <- system.file('extdata/ps/f1_ses/F1-0002-car-rep1-buu-106_bndl/F1-0002-car-rep1-buu-106.wav', package='emuhelpeR')
+# Load sound file
+wav_file <- paste0('extdata/ps/f1_ses/F1-0002-car-rep1-buu-106_bndl/',
+'F1-0002-car-rep1-buu-106.wav')
+datapath <- system.file(wav_file, package='emuhelpeR')
 x <- rPraat::snd.read(datapath)
-mom <- moments_ts(snd_vector=x$sig[,1], sr=x$fs)
+
+# Extract signal vector and sample rate
+sig <- x$sig[,1]
+sr <- x$fs
+
+# Get moments
+mom <- moments_ts(snd_vector=sig, sr=sr)
 }
 \seealso{
 This function is called by \code{\link[=moments2ssff]{moments2ssff()}} which generates these

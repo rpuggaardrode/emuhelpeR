@@ -40,7 +40,10 @@ arguments and pitch floor estimated as 3/4 of the first quantile of the
 first pass, and pitch ceiling as 1½ of the third quantile of the first pass.
 }
 \examples{
-#Not now
+\dontrun{
+# Assuming the working directory meets the requirements mentioned above
+ps_out <- run_ps_dynamic_minmax(getwd())
+}
 }
 \seealso{
 As mentioned above, this function is a wrapper for a suite of

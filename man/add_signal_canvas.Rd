@@ -17,13 +17,15 @@ Wrapper to add one or more signal canvases to the default view of an EMU
 database.
 }
 \examples{
+\dontrun{
 datapath <- system.file('extdata/db', package='emuhelpeR')
 raw <- emuR::load_emuDB(datapath)
 emuR::get_signalCanvasesOrder(raw, 'default')
 add_signal_canvas(db_handle=raw, add='eggF0')
 emuR::get_signalCanvasesOrder(raw, 'default')
 #To have a look at the new order in EMU-SDMS, run
-#emuR::serve(raw)
+emuR::serve(raw)
+}
 }
 \seealso{
 This function wraps the functions \link[emuR:SetGetSignalCanvasesOrder]{emuR::get_signalCanvasesOrder}

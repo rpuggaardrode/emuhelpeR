@@ -21,12 +21,14 @@ four spectral moments from DFT spectra over equidistant time steps and add
 them as SSFF tracks to the database.
 }
 \examples{
+\dontrun{
 datapath <- system.file('extdata/ps', package='emuhelpeR')
 raw <- emuR::load_emuDB(datapath)
 moments2ssff(raw)
 #To have a look at an SSFF track in EMU-SDMS, run e.g.
-#add_signal_canvas(raw, 'cog')
-#emuR::serve(raw)
+add_signal_canvas(raw, 'cog')
+emuR::serve(raw)
+}
 }
 \seealso{
 This function calls \code{\link[=moments_ts]{moments_ts()}} which can be used to calculate

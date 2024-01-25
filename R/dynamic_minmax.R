@@ -17,12 +17,14 @@
 #' @export
 #'
 #' @examples
-#' #not now
+#' \dontrun{
+#' # Don't run directly, see `help(run_ps_dynamic_minmax)`
+#' }
 dynamic_minmax <- function(fm=TRUE, sm=TRUE, ...) {
   tmp <- run_praatsauce(formantMeasures=F, spectralMeasures=F,
                         f0min=60, f0max=700, ...)
   tmp$f0[which(tmp$f0 == 0)] <- NA
-  q <- quantile(tmp$f0, probs=c(0.25, 0.75), na.rm=T, names=F)
+  q <- stats::quantile(tmp$f0, probs=c(0.25, 0.75), na.rm=T, names=F)
   tmp_dyn <- run_praatsauce(f0min=0.75*q[1], f0max=1.5*q[2],
                             formantMeasures=fm, spectralMeasures=sm, ...)
   return(tmp_dyn)

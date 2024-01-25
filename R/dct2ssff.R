@@ -20,12 +20,15 @@
 #' [moments2ssff()] is a sibling function for spectral moments.
 #'
 #' @examples
+#' \dontrun{
 #' datapath <- system.file('extdata/ps', package='emuhelpeR')
 #' raw <- emuR::load_emuDB(datapath)
 #' dct2ssff(raw)
-#' #To have a look at an SSFF track in EMU-SDMS, run e.g.
-#' #add_signal_canvas(raw, 'k0')
-#' #emuR::serve(raw)
+#' # To have a look at an SSFF track in EMU-SDMS, run e.g.
+#' add_signal_canvas(raw, 'k0')
+#' emuR::serve(raw)
+#' }
+
 dct2ssff <- function(db_handle, freq_ceiling=8000, step=5) {
 
   path <- db_handle[['basePath']]

@@ -151,7 +151,10 @@ frequency, three formants, formant bandwidths, and a range of measures of
 spectral slope and harmonics-to-noise ratio.
 }
 \examples{
-# Not right now
+\dontrun{
+# Assuming there are wav files in the current working directory:
+ps_out <- run_praatsauce(getwd())
+}
 }
 \seealso{
 As mentioned above, this function is a wrapper for a suite of

@@ -36,7 +36,10 @@
 #' @export
 #'
 #' @examples
-#' #Not now
+#' \dontrun{
+#' # Assuming the working directory meets the requirements mentioned above
+#' ps_out <- run_ps_dynamic_minmax(getwd())
+#' }
 run_ps_dynamic_minmax <- function(directory, formantMeasures=TRUE,
                                   spectralMeasures=TRUE, ...) {
   fm <- formantMeasures

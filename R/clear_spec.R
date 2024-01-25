@@ -12,7 +12,19 @@
 #' @export
 #'
 #' @examples
-#' #not now
+#' \dontrun{
+#' datapath <- system.file('extdata/db', package='emuhelpeR')
+#' raw <- emuR::load_emuDB(datapath)
+#' emuR::list_ssffTrackDefinitions(raw)
+#'
+#' # Add signal
+#' signal_on_spec(db, track='praatF0')
+#' emuR::serve(raw)
+#'
+#' # Remove signal
+#' clear_spec(db)
+#' emuR::serve(raw)
+#' }
 clear_spec <- function(db, perspective='default') {
   json_fn <- list.files(db$basePath, pattern='*.json')
   fp <- file.path(db$basePath, json_fn)

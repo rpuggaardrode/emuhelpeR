@@ -16,8 +16,10 @@
 #' @export
 #'
 #' @examples
-#' # don't run
-#' # x <- load_db()
+#' \dontrun{
+#' x <- load_db()
+#' }
+
 load_db <- function(recursive=TRUE, serve=TRUE) {
 
   dirs <- list.dirs(full.names=F, recursive=recursive)

@@ -30,9 +30,18 @@ DFT spectra over equidistant time steps and calculate the first four
 DCT coefficients of each spectrum.
 }
 \examples{
-datapath <- system.file('extdata/ps/f1_ses/F1-0002-car-rep1-buu-106_bndl/F1-0002-car-rep1-buu-106.wav', package='emuhelpeR')
+# Load sound file
+wav_file <- paste0('extdata/ps/f1_ses/F1-0002-car-rep1-buu-106_bndl/',
+'F1-0002-car-rep1-buu-106.wav')
+datapath <- system.file(wav_file, package='emuhelpeR')
 x <- rPraat::snd.read(datapath)
-coef <- dct_ts(snd_vector=x$sig[,1], sr=x$fs)
+
+# Extract signal vector and sample rate
+sig <- x$sig[,1]
+sr <- x$fs
+
+# Get coefficients
+coef <- dct_ts(snd_vector=sig, sr=sr)
 }
 \seealso{
 This function is called by \code{\link[=dct2ssff]{dct2ssff()}} which generates these
@@ -41,5 +50,5 @@ time series for each sound file in an EMU-SDMS data base.
 Spectra are generated using \code{\link[phonTools:spectralslice]{phonTools::spectralslice()}} and coefficients are
 calculated using \code{\link[emuR:dct]{emuR::dct()}}.
 
-\code{\link[=moments_ts]{moments_ts()}} is a sibling function for DCT coefficients.
+\code{\link[=moments_ts]{moments_ts()}} is a sibling function for spectral moments.
 }

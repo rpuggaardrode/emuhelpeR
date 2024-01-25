@@ -25,9 +25,18 @@
 #' @export
 #'
 #' @examples
-#' datapath <- system.file('extdata/ps/f1_ses/F1-0002-car-rep1-buu-106_bndl/F1-0002-car-rep1-buu-106.wav', package='emuhelpeR')
+#' # Load sound file
+#' wav_file <- paste0('extdata/ps/f1_ses/F1-0002-car-rep1-buu-106_bndl/',
+#' 'F1-0002-car-rep1-buu-106.wav')
+#' datapath <- system.file(wav_file, package='emuhelpeR')
 #' x <- rPraat::snd.read(datapath)
-#' mom <- moments_ts(snd_vector=x$sig[,1], sr=x$fs)
+#'
+#' # Extract signal vector and sample rate
+#' sig <- x$sig[,1]
+#' sr <- x$fs
+#'
+#' # Get moments
+#' mom <- moments_ts(snd_vector=sig, sr=sr)
 moments_ts <- function(snd_vector,
                        sr,
                        freq_ceiling=8000,

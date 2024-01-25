@@ -25,13 +25,16 @@
 #' although this has not been tested.
 #'
 #' @examples
+#' \dontrun{
 #' datapath <- system.file('extdata/ps', package='emuhelpeR')
 #' raw <- emuR::load_emuDB(datapath)
 #' dplyr::glimpse(ps)
 #' praatsauce2ssff(ps_output=ps, db_handle=raw, session_col='session')
 #' # To have a look at an SSFF track in EMU-SDMS, run
-#' #add_signal_canvas(raw, 'f0')
-#' #emuR::serve(raw)
+#' add_signal_canvas(raw, 'f0')
+#' emuR::serve(raw)
+#' }
+
 praatsauce2ssff <- function(ps_output,
                             db_handle,
                             session_col=NULL) {

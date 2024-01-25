@@ -23,8 +23,9 @@ its name whenever there is only one EMU-SDMS database in the working
 directory and its subdirectories.
 }
 \examples{
-# don't run
-# x <- load_db()
+\dontrun{
+x <- load_db()
+}
 }
 \seealso{
 This is a wrapper for the functions \code{\link[emuR:load_emuDB]{emuR::load_emuDB()}} and

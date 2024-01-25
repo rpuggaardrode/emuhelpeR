@@ -20,12 +20,15 @@
 #' [dct2ssff()] is a sibling function for DCT coefficients.
 #'
 #' @examples
+#' \dontrun{
 #' datapath <- system.file('extdata/ps', package='emuhelpeR')
 #' raw <- emuR::load_emuDB(datapath)
 #' moments2ssff(raw)
 #' #To have a look at an SSFF track in EMU-SDMS, run e.g.
-#' #add_signal_canvas(raw, 'cog')
-#' #emuR::serve(raw)
+#' add_signal_canvas(raw, 'cog')
+#' emuR::serve(raw)
+#' }
+
 moments2ssff <- function(db_handle,
                          freq_ceiling=8000,
                          step=5) {

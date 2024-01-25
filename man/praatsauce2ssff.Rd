@@ -21,13 +21,15 @@ All measurement tracks in PraatSauce output file are converted into SSFF
 tracks and added to an existing EMU database.
 }
 \examples{
+\dontrun{
 datapath <- system.file('extdata/ps', package='emuhelpeR')
 raw <- emuR::load_emuDB(datapath)
 dplyr::glimpse(ps)
 praatsauce2ssff(ps_output=ps, db_handle=raw, session_col='session')
 # To have a look at an SSFF track in EMU-SDMS, run
-#add_signal_canvas(raw, 'f0')
-#emuR::serve(raw)
+add_signal_canvas(raw, 'f0')
+emuR::serve(raw)
+}
 }
 \seealso{
 This function partially wraps functionality from the \code{emuR} package, in

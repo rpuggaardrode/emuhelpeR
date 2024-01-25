@@ -91,7 +91,10 @@
 #' @export
 #'
 #' @examples
-#' # Not right now
+#' \dontrun{
+#' # Assuming there are wav files in the current working directory:
+#' ps_out <- run_praatsauce(getwd())
+#' }
 run_praatsauce <- function(wav_loc,
                            tg_loc='none',
                            out_loc=NULL,

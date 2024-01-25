@@ -14,6 +14,7 @@ Sets the default signal canvas order in an EMU database to the standard
 setting of waveform and spectrogram.
 }
 \examples{
+\dontrun{
 datapath <- system.file('extdata/db', package='emuhelpeR')
 raw <- emuR::load_emuDB(datapath)
 emuR::get_signalCanvasesOrder(raw, 'default')
@@ -21,6 +22,7 @@ add_signal_canvas(db_handle=raw, add='eggF0')
 emuR::get_signalCanvasesOrder(raw, 'default')
 reset_signal_canvas(db_handle=raw)
 emuR::get_signalCanvasesOrder(raw, 'default')
+}
 }
 \seealso{
 Wraps the function \link[emuR:SetGetSignalCanvasesOrder]{emuR::set_signalCanvasesOrder}.

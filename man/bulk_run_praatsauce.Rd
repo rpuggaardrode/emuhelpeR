@@ -33,9 +33,11 @@ different speakers, fx with varying pitch floor and ceiling or varying
 formant references.
 }
 \examples{
+\dontrun{
 da <- list(speakers=c('a', 'b', 'c'), f0min=c(120, 150, 80),
 f0max=c(300, 400, 250))
-#bulk_run_praatsauce(directory='my_directory', dyn_args=da)
+bulk_run_praatsauce(directory='my_directory', dyn_args=da)
+}
 }
 \seealso{
 As mentioned above, this function is a wrapper for a suite of

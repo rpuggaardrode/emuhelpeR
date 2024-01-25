@@ -26,5 +26,7 @@ arguments and the new F0 limits. Usually called from
 \link{run_ps_dynamic_minmax}.
 }
 \examples{
-#not now
+\dontrun{
+# Don't run directly, see `help(run_ps_dynamic_minmax)`
+}
 }

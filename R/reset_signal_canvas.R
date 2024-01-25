@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' datapath <- system.file('extdata/db', package='emuhelpeR')
 #' raw <- emuR::load_emuDB(datapath)
 #' emuR::get_signalCanvasesOrder(raw, 'default')
@@ -16,6 +17,7 @@
 #' emuR::get_signalCanvasesOrder(raw, 'default')
 #' reset_signal_canvas(db_handle=raw)
 #' emuR::get_signalCanvasesOrder(raw, 'default')
+#' }
 reset_signal_canvas <- function(db_handle) {
   sco <- c('OSCI', 'SPEC')
   emuR::set_signalCanvasesOrder(db_handle, 'default', sco)

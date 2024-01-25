@@ -21,12 +21,14 @@ four DCT coefficients from DFT spectra over equidistant time steps and add
 them as SSFF tracks to the database.
 }
 \examples{
+\dontrun{
 datapath <- system.file('extdata/ps', package='emuhelpeR')
 raw <- emuR::load_emuDB(datapath)
 dct2ssff(raw)
-#To have a look at an SSFF track in EMU-SDMS, run e.g.
-#add_signal_canvas(raw, 'k0')
-#emuR::serve(raw)
+# To have a look at an SSFF track in EMU-SDMS, run e.g.
+add_signal_canvas(raw, 'k0')
+emuR::serve(raw)
+}
 }
 \seealso{
 This function calls \code{\link[=dct_ts]{dct_ts()}} which can be used to calculate

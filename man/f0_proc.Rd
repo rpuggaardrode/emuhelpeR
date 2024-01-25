@@ -84,6 +84,7 @@ head(ssff_data$praatF0, 20)
 head(ssff_data$H1H2c, 20)
 sum(is.na(ssff_data$praatF0))
 sum(is.na(ssff_data$H1H2c))
+
 #Uses both speaker and vowel variables for outlier removal; F0 values and
 #dependents are recoded as NA if they are more than 250 ms from boundaries
 #labeled 'cl'.

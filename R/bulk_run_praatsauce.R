@@ -35,17 +35,19 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' da <- list(speakers=c('a', 'b', 'c'), f0min=c(120, 150, 80),
 #' f0max=c(300, 400, 250))
-#' #bulk_run_praatsauce(directory='my_directory', dyn_args=da)
+#' bulk_run_praatsauce(directory='my_directory', dyn_args=da)
+#' }
 bulk_run_praatsauce <- function(directory, dyn_args, ...) {
   extra_args <- list(...)
-  if (class(dyn_args) == 'data.frame') dyn_args <- as.list(dyn_args)
+  if (is.data.frame(dyn_args)) dyn_args <- as.list(dyn_args)
   if (any(!names(dyn_args)[-1] %in% names(as.list(args(run_praatsauce))))) {
     stop('Some of the provided dynamic arguments are not known PraatSauce arguments')
   }
 
-  dirs <- list.dirs(path2wav, full.names=FALSE, recursive=FALSE)
+  dirs <- list.dirs(directory, full.names=FALSE, recursive=FALSE)
   d <- which(dirs==dyn_args$speakers[1])
   args <- sapply(dyn_args, '[[', d)[-1]
   speaker_dir <- paste0(directory, '/', dyn_args$speakers[1])

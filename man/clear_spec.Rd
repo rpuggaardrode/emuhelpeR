@@ -17,7 +17,19 @@ Change the configuration of an EMU database perspective to no longer
 display signal from an SSFF track on top of the spectrogram.
 }
 \examples{
-#not now
+\dontrun{
+datapath <- system.file('extdata/db', package='emuhelpeR')
+raw <- emuR::load_emuDB(datapath)
+emuR::list_ssffTrackDefinitions(raw)
+
+# Add signal
+signal_on_spec(db, track='praatF0')
+emuR::serve(raw)
+
+# Remove signal
+clear_spec(db)
+emuR::serve(raw)
+}
 }
 \seealso{
 \code{signal_on_spec()} is a function for adding SSFF tracks to a
