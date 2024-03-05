@@ -41,13 +41,21 @@
 #' ps_out <- run_ps_dynamic_minmax(getwd())
 #' }
 run_ps_dynamic_minmax <- function(directory, formantMeasures=TRUE,
-                                  spectralMeasures=TRUE, ...) {
+                                  spectralMeasures=TRUE,
+                                  min_multiplier=0.75,
+                                  max_multiplier=1.5, ...) {
   fm <- formantMeasures
   sm <- spectralMeasures
   speakers <- list.dirs(directory, full.names=T, recursive=F)
-  ps_dyn <- dynamic_minmax(fm=fm, sm=sm, wav_loc=speakers[1], ...)
+  ps_dyn <- dynamic_minmax(fm=fm, sm=sm,
+                           min_multiplier=min_multiplier,
+                           max_multiplier=max_multiplier,
+                           wav_loc=speakers[1], ...)
   for (s in speakers[-1]) {
-    tmp <- dynamic_minmax(fm=fm, sm=sm, wav_loc=s, ...)
+    tmp <- dynamic_minmax(fm=fm, sm=sm,
+                          min_multiplier=min_multiplier,
+                          max_multiplier=max_multiplier,
+                          wav_loc=s, ...)
     ps_dyn <- rbind(ps_dyn, tmp)
   }
   return(ps_dyn)
